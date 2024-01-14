@@ -13,7 +13,7 @@ Portable hardware devices for hacking have become popular with Flipper Zero bein
 
 Orcas are the largest species in the dolphin family (Delphinidae). Like dolphins, they are intelligent, social mammals with a complex communication system. Orcas are apex predators, meaning they are at the top of the food chain and have no natural predators. The name Orca One was chosen as a reference to the name of the coveted device named after the famous dolphin.
 
-## Current Roadmap
+## Current Roadmap (UNFINISHED!)
 
 | Code | Feature | Alternative Available | Required Hardware | Implemented on Firmware |
 | ---- | ------- | --------------------- | -------------------- | -------- |
