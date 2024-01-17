@@ -29,7 +29,7 @@ Orcas are the largest species in the dolphin family (Delphinidae). Like dolphins
 
 ## How to Contribute
 
-Please review the instructions on how to contribute to this project at Contributing
+Please review the instructions on how to contribute to this project at [Contributing](./CONTRIBUTING.md)
 
 ## Contact the Devs
 
