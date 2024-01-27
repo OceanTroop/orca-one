@@ -20,7 +20,7 @@ Orcas are the largest species in the dolphin family (Delphinidae). Like dolphins
 | 1 | Sub-Ghz | Yes | [RF433R](https://shop.m5stack.com/products/rf-unit-433mhz-receiver-syn513r) / [RF433T](https://shop.m5stack.com/products/rf-unit-433mhz-transmitter-syn115) | -
 | 2 | NFC | Yes | [RFID2](https://shop.m5stack.com/products/rfid-unit-2-ws1850s)
 | 3 | RFID 125 kHz | No | -
-| 4 | Infrared | Yes | [StickC Plus1](https://shop.m5stack.com/products/m5stickc-plus-esp32-pico-mini-iot-development-kit?variant=43983456764161) / [StickC Plus2](https://shop.m5stack.com/products/m5stickc-plus2-esp32-mini-iot-development-kit) / [Cardpuder](https://shop.m5stack.com/products/m5stack-cardputer-kit-w-m5stamps3) | Nemo
+| 4 | Infrared | Yes | [StickC Plus1](https://shop.m5stack.com/products/m5stickc-plus-esp32-pico-mini-iot-development-kit?variant=43983456764161) / [StickC Plus2](https://shop.m5stack.com/products/m5stickc-plus2-esp32-mini-iot-development-kit) / [Cardputer](https://shop.m5stack.com/products/m5stack-cardputer-kit-w-m5stamps3) | Nemo
 | 5 | BLE Spam | Yes | -
 | 6 | Marauder | Yes | -
 | 7 | Evil Portal | Yes | -
