@@ -8,3 +8,14 @@ void DisplayInterface::begin()
 
     _tft->setRotation(3);
 }
+
+DisplaySettings DisplayInterface::getSettings()
+{
+    DisplaySettings settings;
+    
+    settings.width = 135;
+    settings.height = 240;
+    settings.menuItemsToShow = 4;
+    
+    return settings;
+}

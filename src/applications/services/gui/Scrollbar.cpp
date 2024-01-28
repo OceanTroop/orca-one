@@ -1,26 +1,20 @@
 #include "Scrollbar.h"
+#include "../../../domain/entities/DeviceBase.h"
 
 using namespace Applications::Services::GUI;
+using namespace Domain::Entities;
 
 void Scrollbar::render(std::shared_ptr<TFT_eSPI> tft)
 {
-    // int barWidth = 2;
-    // int barHeight = TFT_HEIGHT;
-    // int barX = TFT_WIDTH - barWidth;
-    // int barY = 0;
-    // int currentPage = 0;
-    // int itemsPerPage = 3;
+    tft->fillRect(TFT_HEIGHT - 9, 0, 2, TFT_WIDTH, TFT_GREEN);
 
-    // int scrollPosition = 30;
-    // // Desenha a barra de rolagem na lateral direita
-    // tft->fillRect(barX, barY, barWidth, barHeight, TFT_DARKGREY);
+    int scrollBarHeight = TFT_WIDTH / this->_totalItems;
+    int scrollBarY = this->_currentItem * scrollBarHeight;
 
-    // // Calcula a posição da "cabeça" da barra de rolagem
-    // int scrollBarHeight = barY + (barHeight - scrollBarHeight) * currentPage / (this->_totalItems / itemsPerPage);
-    // int scrollBarY = map(scrollPosition, 0, TFT_WIDTH - barHeight, 0, TFT_WIDTH - barHeight);
+    if (this->_currentItem + 1 == this->_totalItems)
+        scrollBarY = TFT_WIDTH - scrollBarHeight;
 
-    // // Desenha a "cabeça" da barra de rolagem
-    // tft->fillRect(barX, scrollBarY, barWidth, scrollBarHeight, TFT_GREEN);
+    tft->fillRect(TFT_HEIGHT - 11, scrollBarY, 6, scrollBarHeight, TFT_GREEN);
 }
 
 void Scrollbar::setCurrentItem(int currentItem)

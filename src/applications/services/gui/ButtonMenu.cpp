@@ -70,13 +70,13 @@ bool ButtonMenu::isSelected()
     return this->_selected;
 }
 
-void ButtonMenu::click(std::shared_ptr<AppContext> appContext)
+void ButtonMenu::click()
 {
     if (this->_onClick != nullptr)
-        this->_onClick(appContext);
+        this->_onClick();
 }
 
-void ButtonMenu::setOnClick(Delegates::OnExecute onClick)
+void ButtonMenu::setOnClick(std::function<void()> onClick)
 {
     this->_onClick = onClick;
 }

@@ -4,6 +4,7 @@
 #include <memory>
 
 #include "IInterface.h"
+#include "DisplaySettings.h"
 
 #ifdef __cplusplus
 extern "C"
@@ -20,6 +21,7 @@ extern "C"
             virtual void begin();
             virtual void loop();
             virtual const std::shared_ptr<TFT_eSPI> getTFT();
+            virtual DisplaySettings getSettings() = 0;
 
         protected:
             std::shared_ptr<TFT_eSPI> _tft;

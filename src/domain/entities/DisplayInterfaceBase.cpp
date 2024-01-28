@@ -14,7 +14,8 @@ InterfaceType DisplayInterfaceBase::getType()
 void DisplayInterfaceBase::begin()
 {
     _tft = std::make_shared<TFT_eSPI>();
-    _tft->init();
+    _tft->begin();
+    _tft->setFreeFont(nullptr);
 }
 
 void DisplayInterfaceBase::loop()

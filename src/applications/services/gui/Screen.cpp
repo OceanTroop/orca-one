@@ -1,4 +1,5 @@
 #include "Screen.h"
+#include "ScreenManager.h"
 
 using namespace Applications::Services::GUI;
 
@@ -12,12 +13,30 @@ void Screen::render()
     this->render(this->_tft);
 }
 
-void Screen::setPrevious(std::shared_ptr<Screen> previous)
+void Screen::setPreviousScreen(Screen *previous)
 {
-    this->_previous = previous;
+    this->_previousScreen = previous;
 }
 
-std::shared_ptr<Screen> Applications::Services::GUI::Screen::getPrevious()
+Screen *Screen::getPreviousScreen()
 {
-    return this->_previous;
+    return this->_previousScreen;
+}
+
+void Screen::buttonPreviousPressed()
+{
+}
+
+void Screen::buttonBackPressed()
+{
+    if (this->_previousScreen != nullptr)
+        ScreenManager::setCurrentScreen(this->_previousScreen);
+}
+
+void Screen::buttonSelectPressed()
+{
+}
+
+void Screen::buttonNextPressed()
+{
 }

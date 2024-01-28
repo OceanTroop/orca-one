@@ -6,10 +6,10 @@
 #include "AbstractGuiModule.h"
 #include "Screen.h"
 
-#ifdef __cplusplus
-extern "C"
-{
-#endif
+// #ifdef __cplusplus
+// extern "C"
+// {
+// #endif
     namespace Applications::Services::GUI
     {
         class ScreenManager : public AbstractGuiModule
@@ -20,20 +20,30 @@ extern "C"
 
         protected:
             std::shared_ptr<TFT_eSPI> _tft;
-            std::shared_ptr<Screen> _currentScreen = nullptr;
+            Screen *_currentScreen = nullptr;
 
         public:
             ScreenManager(std::shared_ptr<TFT_eSPI> tft);
 
-            static const ScreenManager *getCurrent();
+            static ScreenManager *getCurrent();
+            static void setCurrentScreen(Screen *currentScreen);
+            static void setToPreviousScreen();
+
+            template <typename T>
+            static void setCurrentScreenByType()
+            {
+                auto tft = ScreenManager::getCurrent()->_tft;
+                auto screen = new T(tft);
+                ScreenManager::setCurrentScreen(screen);
+            }
+
+            static Screen *getCurrentScreen();
 
             virtual void render(std::shared_ptr<TFT_eSPI> tft);
             virtual void render();
-            virtual void setCurrentScreen(std::shared_ptr<Screen> currentScreen);
-            virtual std::shared_ptr<Screen> getCurrentScreen();
         };
     }
 
-#ifdef __cplusplus
-}
-#endif
+// #ifdef __cplusplus
+// }
+// #endif

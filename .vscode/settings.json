@@ -1,6 +1,8 @@
 {
     "files.associations": {
-        "button_menu.h": "c"
+        "button_menu.h": "c",
+        "glcdfont.c": "cpp",
+        "font16.c": "cpp"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }

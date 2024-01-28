@@ -4,8 +4,7 @@
 #include <TFT_eSPI.h>
 
 #include "AbstractGuiModule.h"
-#include "../../../domain/entities/AppContext.h"
-#include "../../../domain/entities/Delegates.h"
+#include "../../AppContext.h"
 
 using namespace Domain::Entities;
 
@@ -28,7 +27,7 @@ extern "C"
             int _y = -1;
             String _text;
             bool _selected = false;
-            Delegates::OnExecute _onClick = nullptr;
+            std::function<void()> _onClick = nullptr;
 
         public:
             void render(std::shared_ptr<TFT_eSPI> tft);
@@ -42,8 +41,8 @@ extern "C"
             void setText(String text);
             void setSelected(bool selected);
             bool isSelected();
-            void setOnClick(Delegates::OnExecute onClick);
-            void click(std::shared_ptr<AppContext> appContext);
+            void setOnClick(std::function<void()> onClick);
+            void click();
         };
     }
 

@@ -5,7 +5,7 @@ using namespace Domain::Entities;
 DeviceBase *DeviceBase::_current = nullptr;
 bool DeviceBase::_initialized = false;
 
-DeviceBase::DeviceBase(const Interfaces interfaces)
+DeviceBase::DeviceBase(Interfaces interfaces)
 {
     if (DeviceBase::_initialized)
     {
@@ -18,13 +18,15 @@ DeviceBase::DeviceBase(const Interfaces interfaces)
     DeviceBase::_current = this;
 }
 
-const DeviceBase *DeviceBase::getCurrent()
+DeviceBase *DeviceBase::getCurrent()
 {
     return DeviceBase::_current;
 }
 
 void DeviceBase::begin()
 {
+    Serial.begin(115200);
+
     if (this->interfaces.displayInterface != nullptr)
         this->interfaces.displayInterface->begin();
 
@@ -57,6 +59,8 @@ void DeviceBase::begin()
 
     if (this->interfaces.infraredInterface != nullptr)
         this->interfaces.infraredInterface->begin();
+
+    delay(100);
 }
 
 void DeviceBase::loop()
@@ -93,6 +97,8 @@ void DeviceBase::loop()
 
     if (this->interfaces.infraredInterface != nullptr)
         this->interfaces.infraredInterface->loop();
+
+    delay(150);
 }
 
 bool DeviceBase::hasInterface(InterfaceType type)
@@ -126,7 +132,7 @@ bool DeviceBase::hasInterface(InterfaceType type)
     }
 }
 
-const Interfaces Domain::Entities::DeviceBase::getInterfaces()
+Interfaces Domain::Entities::DeviceBase::getInterfaces()
 {
     return this->interfaces;
 }

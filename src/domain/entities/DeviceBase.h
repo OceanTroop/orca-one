@@ -18,9 +18,9 @@ extern "C"
         class DeviceBase
         {
         public:
-            DeviceBase(const Interfaces interfaces);
+            DeviceBase(Interfaces interfaces);
 
-            static const DeviceBase *getCurrent();
+            static DeviceBase *getCurrent();
 
             virtual String getName() = 0;
             virtual void begin();
@@ -28,7 +28,7 @@ extern "C"
 
             bool hasInterface(InterfaceType type);
 
-            virtual const Interfaces getInterfaces();
+            virtual Interfaces getInterfaces();
 
         private:
             static DeviceBase *_current;

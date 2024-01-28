@@ -15,15 +15,20 @@ extern "C"
         {
         protected:
             std::shared_ptr<TFT_eSPI> _tft;
-            std::shared_ptr<Screen> _previous = nullptr;
+            Screen *_previousScreen = nullptr;
 
         public:
             Screen(std::shared_ptr<TFT_eSPI> tft);
 
             virtual void render(std::shared_ptr<TFT_eSPI> tft) = 0;
             virtual void render();
-            virtual void setPrevious(std::shared_ptr<Screen> previous);
-            virtual std::shared_ptr<Screen> getPrevious();
+            virtual void setPreviousScreen(Screen *previous);
+            virtual Screen *getPreviousScreen();
+
+            virtual void buttonNextPressed();
+            virtual void buttonPreviousPressed();
+            virtual void buttonBackPressed();
+            virtual void buttonSelectPressed();
         };
     }
 

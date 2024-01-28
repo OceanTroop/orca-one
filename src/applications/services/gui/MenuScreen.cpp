@@ -2,63 +2,76 @@
 
 using namespace Applications::Services::GUI;
 
+MenuItem *MenuScreen::getCurrentItem()
+{
+    return &this->_items.at(this->_currentItemIndex);
+}
+
+MenuItem MenuScreen::newBackItem()
+{
+    auto action = [this]()
+    {
+        ScreenManager::setCurrentScreen(this);
+    };
+
+    auto item = MenuItem("backMenuItem", "Back");
+
+    item.setOnClick(action);
+
+    return item;
+}
+
+MenuScreen::MenuScreen(std::shared_ptr<TFT_eSPI> tft) : Screen(tft)
+{
+}
+
 void MenuScreen::render(std::shared_ptr<TFT_eSPI> tft)
 {
-    // TODO: show buttons
-    // when first, show: current, current+1 and current+2
-    // when last, show current-2, current-1, current
-    // else show: current-1, current, current+1
+    tft->fillScreen(TFT_BLACK);
+    
+    auto displayInterface = DeviceBase::getCurrent()->getInterfaces().displayInterface;
+    auto displaySettings = displayInterface->getSettings();
+
     int totalItems = this->_items.size();
 
     if (totalItems == 0)
         return;
 
-    for (int i = 0; i < totalItems; i++)
-    {
-        this->_items.at(i).setSelected(i == this->_currentItemIndex ? true : false);
-    }
-
     std::vector<MenuItem> itemsToShow = std::vector<MenuItem>();
 
-    if (this->_currentItemIndex == 0 || totalItems <= 3) // First
+    if (totalItems > displaySettings.menuItemsToShow)
     {
-        itemsToShow.push_back(this->_items.at(0));
+        auto firstItem = this->_currentItemIndex == 0
+                             ? this->_items.at(totalItems - 1)
+                             : this->_items.at(this->_currentItemIndex - 1);
 
-        if (totalItems > 1)
-            itemsToShow.push_back(this->_items.at(1));
+        itemsToShow.push_back(firstItem);
 
-        if (totalItems > 2)
-            itemsToShow.push_back(this->_items.at(2));
-    }
-    else if (this->_currentItemIndex == (totalItems - 1)) // Last
-    {
-        itemsToShow.push_back(this->_items.at(this->_currentItemIndex - 2));
-        itemsToShow.push_back(this->_items.at(this->_currentItemIndex - 1));
-        itemsToShow.push_back(this->_items.at(this->_currentItemIndex));
+        for (int i = this->_currentItemIndex; i < totalItems && itemsToShow.size() < displaySettings.menuItemsToShow; i++)
+        {
+            itemsToShow.push_back(this->_items.at(i));
+        }
+
+        if (itemsToShow.size() < displaySettings.menuItemsToShow)
+        {
+            for (int i = 0; i < totalItems && itemsToShow.size() < displaySettings.menuItemsToShow; i++)
+            {
+                itemsToShow.push_back(this->_items.at(i));
+            }
+        }
     }
     else
     {
-        itemsToShow.push_back(this->_items.at(this->_currentItemIndex - 1));
-        itemsToShow.push_back(this->_items.at(this->_currentItemIndex));
-        itemsToShow.push_back(this->_items.at(this->_currentItemIndex + 1));
+        for (int i = 0; i < totalItems; i++)
+        {
+            itemsToShow.push_back(this->_items.at(i));
+        }
     }
 
-    if (itemsToShow.size() > 0)
+    for (int i = 0; i < itemsToShow.size(); i++)
     {
-        itemsToShow.at(0).setPosition(5, 10);
-        itemsToShow.at(0).render(this->_tft);
-    }
-
-    if (itemsToShow.size() > 1)
-    {
-        itemsToShow.at(1).setPosition(5, 40);
-        itemsToShow.at(1).render(this->_tft);
-    }
-
-    if (itemsToShow.size() > 2)
-    {
-        itemsToShow.at(2).setPosition(5, 70);
-        itemsToShow.at(2).render(this->_tft);
+        itemsToShow.at(i).setPosition(5, 10 + (i * 30));
+        itemsToShow.at(i).render(this->_tft);
     }
 
     this->_scrollbar.setCurrentItem(this->_currentItemIndex);
@@ -78,18 +91,24 @@ void MenuScreen::addItem(MenuItem item)
     this->_scrollbar.setTotalItems(this->_items.size());
 }
 
+void MenuScreen::addItems(std::vector<MenuItem> items)
+{
+    for (auto item : items)
+        this->addItem(item);
+}
+
 void MenuScreen::removeItem(String id)
 {
     // todo
     this->_scrollbar.setTotalItems(this->_items.size());
 }
 
-void MenuScreen::selectNext()
+void MenuScreen::buttonNextPressed()
 {
     if (this->_items.size() <= 1)
         return;
 
-    this->_items.at(this->_currentItemIndex).setSelected(false);
+    this->getCurrentItem()->setSelected(false);
 
     if (this->_currentItemIndex == (this->_items.size() - 1)) // last item
     {
@@ -100,17 +119,17 @@ void MenuScreen::selectNext()
         this->_currentItemIndex++;
     }
 
-    this->_items.at(this->_currentItemIndex).setSelected(true);
+    this->getCurrentItem()->setSelected(true);
 
     Screen::render();
 }
 
-void MenuScreen::selectPrevious()
+void MenuScreen::buttonPreviousPressed()
 {
     if (this->_items.size() <= 1)
         return;
 
-    this->_items.at(this->_currentItemIndex).setSelected(false);
+    this->getCurrentItem()->setSelected(false);
 
     if (this->_currentItemIndex == 0) // first item
     {
@@ -121,7 +140,27 @@ void MenuScreen::selectPrevious()
         this->_currentItemIndex--;
     }
 
-    this->_items.at(this->_currentItemIndex).setSelected(true);
+    this->getCurrentItem()->setSelected(true);
 
     Screen::render();
+}
+
+void MenuScreen::buttonSelectPressed()
+{
+    auto currentItem = this->getCurrentItem();
+    auto subItems = currentItem->getItems();
+
+    if (subItems.size() > 0)
+    {
+        auto subMenuScreen = new MenuScreen(this->_tft);
+
+        subMenuScreen->addItem(this->newBackItem());
+        subMenuScreen->addItems(subItems);
+
+        ScreenManager::setCurrentScreen(subMenuScreen);
+    }
+    else
+    {
+        currentItem->click();
+    }
 }

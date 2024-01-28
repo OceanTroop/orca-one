@@ -19,15 +19,16 @@ extern "C"
 
         public:
             MenuItem() {}
-            MenuItem(String id, String text, Delegates::OnExecute onClick)
+            MenuItem(String id, String text)
             {
                 this->_id = id;
                 this->_text = text;
-                this->_onClick = onClick;
             }
 
             virtual void addItem(MenuItem item);
             virtual void removeItem(String id);
+            virtual std::vector<MenuItem> getItems();
+            virtual bool hasItems();
         };
     }
 
