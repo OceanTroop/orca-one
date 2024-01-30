@@ -1,3 +1,5 @@
+#ifdef M5STICKCPLUS1_1
+
 #include "ButtonsInterface.h"
 
 using namespace Infrastructure::M5StickCPlus1_1;
@@ -21,3 +23,5 @@ void ButtonsInterface::loop()
     if (this->_buttonSelect.isPressed())
         this->_onClickSelect.fireEvent();
 }
+
+#endif

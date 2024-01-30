@@ -1,14 +1,14 @@
-#ifdef M5STICKCPLUS1_1
+#ifdef M5CARDPUTER
 
 #include "DisplayInterface.h"
 
-using namespace Infrastructure::M5StickCPlus1_1;
+using namespace Infrastructure::M5Cardputer;
 
 void DisplayInterface::begin()
 {
     Domain::Entities::DisplayInterfaceBase::begin();
 
-    _tft->setRotation(3);
+    _tft->setRotation(1);
 }
 
 DisplaySettings DisplayInterface::getSettings()

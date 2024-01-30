@@ -1,7 +1,9 @@
+#ifdef M5STICKCPLUS1_1
+
 #pragma once
 
 #include <memory>
-#include <AXP192.h>
+#include "utility/AXP192.h"
 
 #include "../../domain/entities/PowerManagementInterfaceBase.h"
 
@@ -23,4 +25,5 @@ extern "C"
     }
 #ifdef __cplusplus
 }
+#endif
 #endif

@@ -12,56 +12,21 @@ using namespace Applications::Services::GUI;
 #include "domain\entities\InterfaceType.h"
 using namespace Domain::Entities;
 
+#if defined(M5CARDPUTER)
+
+#include "infrastructure\M5Cardputer\Device.h"
+using namespace Infrastructure::M5Cardputer;
+
+#elif defined(M5STICKCPLUS1_1)
+
 #include "infrastructure\M5StickCPlus1_1\Device.h"
 using namespace Infrastructure::M5StickCPlus1_1;
+
+#endif
 
 Device device = Device();
 
 std::shared_ptr<TFT_eSPI> tft;
-
-// void drawScrollBar(int scrollPosition)
-// {
-//   // Desenha a barra de rolagem na lateral direita
-//   tft->fillRect(TFT_HEIGHT - 6, 0, 2, TFT_WIDTH, TFT_GREEN);
-
-//   // Calcula a posição da "cabeça" da barra de rolagem
-//   int barHeight = TFT_WIDTH * TFT_HEIGHT / 800; // Ajuste conforme necessário
-//   int barY = map(scrollPosition, 0, TFT_WIDTH - barHeight, 0, TFT_WIDTH - barHeight);
-
-//   // Desenha a "cabeça" da barra de rolagem
-//   tft->fillRect(TFT_HEIGHT - 10, barY, 10, barHeight, TFT_GREEN);
-// }
-
-void printlnCharByChar(const char *text)
-{
-  tft->setTextColor(TFT_GREEN);
-  tft->setTextSize(2);
-  tft->setCursor(0, 0);
-
-  size_t textSize = strlen(text);
-
-  for (int i = 0; i < textSize; i++)
-  {
-    char c = text[i];
-    tft->print(c);
-    delay(60);
-  }
-}
-
-void drawSplash()
-{
-  tft->fillScreen(TFT_BLACK);
-  printlnCharByChar("Wake up, Neo...");
-  delay(2 * 1000);
-
-  tft->fillScreen(TFT_BLACK);
-  printlnCharByChar("Follow the white rabbit.");
-  delay(2 * 1000);
-
-  tft->fillScreen(TFT_BLACK);
-  printlnCharByChar("Knock, knock, Neo.");
-  delay(2 * 1000);
-}
 
 void setup()
 {
@@ -69,8 +34,6 @@ void setup()
 
   auto displayInterface = device.getInterfaces().displayInterface;
   tft = displayInterface->getTFT();
-
-  // drawSplash();
 
   ScreenManager *screenManager = new ScreenManager(tft);
 
@@ -99,14 +62,14 @@ void setup()
   MenuItem badUsbMenuItem("badUsbMenuItem", "Bad USB");
 
   MenuItem settingsMenuItem("settingsMenuItem", "Settings");
-  
+
   MenuItem settingsLanguageSubMenuItem("settingsLanguageSubMenuItem", "Language");
   MenuItem settingsLanguageEnglishSubMenuItem("settingsLanguageEnglishSubMenuItem", "English");
   MenuItem settingsLanguagePortuguesBrasilSubMenuItem("settingsLanguagePortuguesBrasilSubMenuItem", "Português (BR)");
   settingsLanguageSubMenuItem.addItem(settingsLanguageEnglishSubMenuItem);
   settingsLanguageSubMenuItem.addItem(settingsLanguagePortuguesBrasilSubMenuItem);
   settingsMenuItem.addItem(settingsLanguageSubMenuItem);
-  
+
   MenuItem settingsAboutSubMenuItem("settingsAboutSubMenuItem", "About");
   settingsAboutSubMenuItem.setOnClick([]()
                                       { 

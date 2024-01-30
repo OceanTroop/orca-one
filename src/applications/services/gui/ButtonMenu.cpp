@@ -1,16 +1,22 @@
 #include "ButtonMenu.h"
-#include <TFT_eSPI.h>
+#include "../../../domain/entities/DeviceBase.h"
 
 using namespace Applications::Services::GUI;
+using namespace Domain::Entities;
+
+#include <TFT_eSPI.h>
 
 void ButtonMenu::render(std::shared_ptr<TFT_eSPI> tft)
 {
+    auto displayInterface = DeviceBase::getCurrent()->getInterfaces().displayInterface;
+    auto displaySettings = displayInterface->getSettings();
+
     // Draw button border
-    tft->drawRoundRect(this->_x, this->_y, TFT_HEIGHT - 20, 25, 8, this->_borderColor);
+    tft->drawRoundRect(this->_x, this->_y, displaySettings.width - 20, 25, 8, this->_borderColor);
 
     // Draw button fill
     if (this->isSelected())
-        tft->fillRoundRect(this->_x, this->_y, TFT_HEIGHT - 20, 25, 8, this->_backgroundColor);
+        tft->fillRoundRect(this->_x, this->_y, displaySettings.width - 20, 25, 8, this->_backgroundColor);
 
     if (this->isSelected())
         tft->setTextColor(this->_selectedTextColor);

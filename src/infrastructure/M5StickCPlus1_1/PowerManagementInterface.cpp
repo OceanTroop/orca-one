@@ -1,3 +1,5 @@
+#ifdef M5STICKCPLUS1_1
+
 #include "DisplayInterface.h"
 #include "PowerManagementInterface.h"
 
@@ -11,3 +13,5 @@ void PowerManagementInterface::begin()
 void PowerManagementInterface::loop()
 {
 }
+
+#endif
