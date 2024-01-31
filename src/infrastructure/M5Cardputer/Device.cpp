@@ -7,7 +7,6 @@
 using namespace Infrastructure::M5Cardputer;
 
 Device::Device() : DeviceBase({std::make_shared<DisplayInterface>(),
-                               nullptr,
                                std::make_shared<ButtonsInterface>()})
 {
 }

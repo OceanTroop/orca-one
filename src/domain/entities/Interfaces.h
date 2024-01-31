@@ -19,8 +19,8 @@ namespace Domain::Entities
     struct Interfaces
     {
         std::shared_ptr<DisplayInterfaceBase> displayInterface;
-        std::shared_ptr<PowerManagementInterfaceBase> powerManagement;
         std::shared_ptr<ButtonsInterfaceBase> buttonsInterface;
+        std::shared_ptr<PowerManagementInterfaceBase> powerManagement;
         std::shared_ptr<BatteryInterfaceBase> batteryInterface;
         std::shared_ptr<WifiInterfaceBase> wifiInterface;
         std::shared_ptr<BluetoothInterfaceBase> bluetoothInterface;

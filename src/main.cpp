@@ -17,10 +17,10 @@ using namespace Domain::Entities;
 #include "infrastructure\M5Cardputer\Device.h"
 using namespace Infrastructure::M5Cardputer;
 
-#elif defined(M5STICKCPLUS1_1)
+#elif defined(M5STICKCPLUS)
 
-#include "infrastructure\M5StickCPlus1_1\Device.h"
-using namespace Infrastructure::M5StickCPlus1_1;
+#include "infrastructure\M5StickCPlus\Device.h"
+using namespace Infrastructure::M5StickCPlus;
 
 #endif
 
@@ -72,9 +72,7 @@ void setup()
 
   MenuItem settingsAboutSubMenuItem("settingsAboutSubMenuItem", "About");
   settingsAboutSubMenuItem.setOnClick([]()
-                                      { 
-                                        auto aboutApp = std::make_shared<Applications::Settings::About::AboutApp>();
-                                        AppUtils::runApplication(aboutApp); });
+                                      { AppUtils::runApplication<Applications::Settings::About::AboutApp>(); });
   settingsMenuItem.addItem(settingsAboutSubMenuItem);
 
   mainMenuScreen->addItem(appsMenuItem);
@@ -86,22 +84,7 @@ void setup()
   mainMenuScreen->addItem(badUsbMenuItem);
   mainMenuScreen->addItem(settingsMenuItem);
 
-  // MenuItem wifiMainMenuItem = MenuItem("wifiMainMenuItem", "Wifi", nullptr);
-
-  // wifiMainMenuItem.addItem(MenuItem("wifiSubMenuScan", "Scan APs", nullptr));
-
-  // MenuItem bluetoothMainMenuItem = MenuItem("bluetoothMainMenuItem", "Bluetooth", nullptr);
-  // MenuItem applicationsMainMenuItem = MenuItem("applicationsMainMenuItem", "Applications", nullptr);
-  // MenuItem settingsMainMenuItem = MenuItem("settingsMainMenuItem", "Settings", nullptr);
-
-  // mainMenuScreen->addItem(wifiMainMenuItem);
-  // mainMenuScreen->addItem(bluetoothMainMenuItem);
-  // mainMenuScreen->addItem(applicationsMainMenuItem);
-  // mainMenuScreen->addItem(settingsMainMenuItem);
-
   screenManager->setCurrentScreen(mainMenuScreen);
-
-  // drawScrollBar(30);
 }
 
 void loop()

@@ -1,8 +1,8 @@
-#ifdef M5STICKCPLUS1_1
+#ifdef M5STICKCPLUS
 
 #include "DisplayInterface.h"
 
-using namespace Infrastructure::M5StickCPlus1_1;
+using namespace Infrastructure::M5StickCPlus;
 
 void DisplayInterface::begin()
 {

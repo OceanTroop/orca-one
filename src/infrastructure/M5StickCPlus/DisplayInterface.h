@@ -1,4 +1,4 @@
-#ifdef M5STICKCPLUS1_1
+#ifdef M5STICKCPLUS
 
 #pragma once
 
@@ -13,7 +13,7 @@ using namespace Domain::Entities;
 extern "C"
 {
 #endif
-    namespace Infrastructure::M5StickCPlus1_1
+    namespace Infrastructure::M5StickCPlus
     {
         class DisplayInterface : public DisplayInterfaceBase
         {

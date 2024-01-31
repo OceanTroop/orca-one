@@ -11,7 +11,7 @@
 extern "C"
 {
 #endif
-    namespace Infrastructure::M5StickCPlus1_1
+    namespace Infrastructure::M5StickCPlus
     {
         class PowerManagementInterface : public Domain::Entities::PowerManagementInterfaceBase
         {

@@ -3,7 +3,7 @@
 #include "DisplayInterface.h"
 #include "PowerManagementInterface.h"
 
-using namespace Infrastructure::M5StickCPlus1_1;
+using namespace Infrastructure::M5StickCPlus;
 
 void PowerManagementInterface::begin()
 {

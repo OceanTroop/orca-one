@@ -30,7 +30,7 @@
             static void setToPreviousScreen();
 
             template <typename T>
-            static void setCurrentScreenByType()
+            static void setCurrentScreen()
             {
                 auto tft = ScreenManager::getCurrent()->_tft;
                 auto screen = new T(tft);

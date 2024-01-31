@@ -6,19 +6,18 @@
 
 using namespace Applications;
 
-#ifdef __cplusplus
-extern "C"
+namespace Applications
 {
-#endif
-    namespace Applications
+    class AppUtils
     {
-        class AppUtils
-        {
-        public:
-            static void runApplication(std::shared_ptr<AppBase> app);
-        };
-    }
+    public:
+        static void runApplication(std::shared_ptr<AppBase> app);
 
-#ifdef __cplusplus
+        template <typename T>
+        static void runApplication()
+        {
+            auto app = std::make_shared<T>();
+            AppUtils::runApplication(app);
+        }
+    };
 }
-#endif
