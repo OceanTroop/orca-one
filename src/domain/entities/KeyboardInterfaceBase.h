@@ -1,5 +1,7 @@
 #pragma once
 
+#include <cstdint>
+
 #include "IInterface.h"
 #include "InterfaceType.h"
 
@@ -13,6 +15,11 @@ extern "C"
         {
         public:
             InterfaceType getType();
+            
+            virtual uint8_t isPressed() = 0;
+            virtual bool isChange() = 0;
+            virtual bool isKeyPressed(char c) = 0;
+            virtual bool capslocked() = 0;
         };
     }
 #ifdef __cplusplus

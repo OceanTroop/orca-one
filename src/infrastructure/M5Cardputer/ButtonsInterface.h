@@ -4,8 +4,14 @@
 
 #include <memory>
 
+#include "utility/Button.h"
+#include "../../domain/entities/DeviceBase.h"
 #include "../../domain/entities/ButtonsInterfaceBase.h"
+#include "../../domain/entities/KeyboardInterfaceBase.h"
 
+using namespace Domain::Entities;
+
+#define BUTTON_SELECT_PIN 0
 #define DEBOUNCE_MS 10
 
 #ifdef __cplusplus
@@ -14,7 +20,7 @@ extern "C"
 #endif
     namespace Infrastructure::M5Cardputer
     {
-        class ButtonsInterface : public Domain::Entities::ButtonsInterfaceBase
+        class ButtonsInterface : public ButtonsInterfaceBase
         {
         public:
             ButtonsInterface();
@@ -22,8 +28,8 @@ extern "C"
             void loop();
 
         private:
-            // Button _buttonNext = Button(BUTTON_B_PIN, true, DEBOUNCE_MS);
-            // Button _buttonSelect = Button(BUTTON_A_PIN, true, DEBOUNCE_MS);
+            std::shared_ptr<KeyboardInterfaceBase> _keyboard = nullptr;
+            Button _buttonSelect = Button(BUTTON_SELECT_PIN, true, DEBOUNCE_MS);
         };
     }
 #ifdef __cplusplus

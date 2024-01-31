@@ -14,14 +14,21 @@ void ButtonsInterface::begin()
 
 void ButtonsInterface::loop()
 {
-    // this->_buttonNext.read();
-    // this->_buttonSelect.read();
+    if (this->_keyboard == nullptr)
+        this->_keyboard = DeviceBase::getCurrent()->getInterfaces().keyboardInterface;
 
-    // if (this->_buttonNext.isPressed())
-    //     this->_onClickNext.fireEvent();
+    if (this->_keyboard->isKeyPressed(';'))
+        this->_onClickPrevious.fireEvent();
 
-    // if (this->_buttonSelect.isPressed())
-    //     this->_onClickSelect.fireEvent();
+    if (this->_keyboard->isKeyPressed('.'))
+        this->_onClickNext.fireEvent();
+
+    if (this->_keyboard->isKeyPressed('`'))
+        this->_onClickBack.fireEvent();
+
+    this->_buttonSelect.read();
+    if (this->_buttonSelect.isPressed())
+        this->_onClickSelect.fireEvent();
 }
 
 #endif

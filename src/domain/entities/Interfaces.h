@@ -21,13 +21,13 @@ namespace Domain::Entities
         std::shared_ptr<DisplayInterfaceBase> displayInterface;
         std::shared_ptr<ButtonsInterfaceBase> buttonsInterface;
         std::shared_ptr<PowerManagementInterfaceBase> powerManagement;
+        std::shared_ptr<KeyboardInterfaceBase> keyboardInterface;
         std::shared_ptr<BatteryInterfaceBase> batteryInterface;
         std::shared_ptr<WifiInterfaceBase> wifiInterface;
         std::shared_ptr<BluetoothInterfaceBase> bluetoothInterface;
         std::shared_ptr<LedInterfaceBase> ledInterface;
         std::shared_ptr<SdCardInterfaceBase> sdCardInterface;
         std::shared_ptr<GpsInterfaceBase> gpsInterface;
-        std::shared_ptr<KeyboardInterfaceBase> keyboardInterface;
         std::shared_ptr<InfraredInterfaceBase> infraredInterface;
     };
 }

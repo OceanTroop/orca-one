@@ -1,4 +1,4 @@
-#ifdef M5STICKCPLUS
+#ifdef M5CARDPUTER
 /*----------------------------------------------------------------------*
  * Arduino Button Library v1.0                                          *
  * Jack Christensen Mar 2012                                            *
