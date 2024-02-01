@@ -6,3 +6,11 @@ InterfaceType BluetoothInterfaceBase::getType()
 {
     return InterfaceType::Bluetooth;
 }
+
+void BluetoothInterfaceBase::loop()
+{
+}
+
+void BluetoothInterfaceBase::begin()
+{
+}

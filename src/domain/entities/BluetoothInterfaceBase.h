@@ -13,6 +13,8 @@ extern "C"
         {
         public:
             InterfaceType getType();
+            virtual void begin();
+            virtual void loop();
         };
     }
 #ifdef __cplusplus

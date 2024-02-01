@@ -6,3 +6,11 @@ InterfaceType WifiInterfaceBase::getType()
 {
     return InterfaceType::Wifi;
 }
+
+void WifiInterfaceBase::loop()
+{
+}
+
+void WifiInterfaceBase::begin()
+{
+}

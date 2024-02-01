@@ -14,7 +14,7 @@ namespace Domain::Entities
     class DeviceBase
     {
     public:
-        DeviceBase(Interfaces interfaces);
+        DeviceBase(Interfaces _interfaces);
 
         static DeviceBase *getCurrent();
 
@@ -30,27 +30,27 @@ namespace Domain::Entities
             switch (type)
             {
             case InterfaceType::Display:
-                return static_cast<T>(this->interfaces.displayInterface);
+                return static_cast<T>(this->_interfaces.displayInterface);
             case InterfaceType::PowerManagement:
-                return static_cast<T>(this->interfaces.powerManagementInterface);
+                return static_cast<T>(this->_interfaces.powerManagementInterface);
             case InterfaceType::Battery:
-                return static_cast<T>(this->interfaces.batteryInterface);
+                return static_cast<T>(this->_interfaces.batteryInterface);
             case InterfaceType::Wifi:
-                return static_cast<T>(this->interfaces.wifiInterface);
+                return static_cast<T>(this->_interfaces.wifiInterface);
             case InterfaceType::Bluetooth:
-                return static_cast<T>(this->interfaces.bluetoothInterface);
+                return static_cast<T>(this->_interfaces.bluetoothInterface);
             case InterfaceType::Led:
-                return static_cast<T>(this->interfaces.ledInterface);
+                return static_cast<T>(this->_interfaces.ledInterface);
             case InterfaceType::SdCard:
-                return static_cast<T>(this->interfaces.sdCardInterface);
+                return static_cast<T>(this->_interfaces.sdCardInterface);
             case InterfaceType::Gps:
-                return static_cast<T>(this->interfaces.gpsInterface);
+                return static_cast<T>(this->_interfaces.gpsInterface);
             case InterfaceType::Keyboard:
-                return static_cast<T>(this->interfaces.keyboardInterface);
+                return static_cast<T>(this->_interfaces.keyboardInterface);
             case InterfaceType::Buttons:
-                return static_cast<T>(this->interfaces.buttonsInterface);
+                return static_cast<T>(this->_interfaces.buttonsInterface);
             case InterfaceType::Infrared:
-                return static_cast<T>(this->interfaces.infraredInterface);
+                return static_cast<T>(this->_interfaces.infraredInterface);
             default:
                 return nullptr;
             }
@@ -63,6 +63,6 @@ namespace Domain::Entities
         static bool _initialized;
 
     protected:
-        Interfaces interfaces;
+        Interfaces _interfaces;
     };
 }
