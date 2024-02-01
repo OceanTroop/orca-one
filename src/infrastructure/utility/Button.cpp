@@ -1,4 +1,3 @@
-#ifdef M5CARDPUTER
 /*----------------------------------------------------------------------*
  * Arduino Button Library v1.0                                          *
  * Jack Christensen May 2011, published Mar 2012                        *
@@ -131,4 +130,3 @@ uint8_t Button::releasedFor(uint32_t ms) {
 uint32_t Button::lastChange(void) {
     return _lastChange;
 }
-#endif

@@ -15,6 +15,11 @@ extern "C"
         public:
             InterfaceType getType();
 
+            virtual bool hasNext() = 0;
+            virtual bool hasPrevious() = 0;
+            virtual bool hasSelect() = 0;
+            virtual bool hasBack() = 0;
+
             void registerOnClickNext(std::function<void()> handler);
             void registerOnClickPrevious(std::function<void()> handler);
             void registerOnClickSelect(std::function<void()> handler);

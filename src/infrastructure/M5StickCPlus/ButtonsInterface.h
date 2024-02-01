@@ -3,7 +3,7 @@
 #pragma once
 
 #include <memory>
-#include "utility/Button.h"
+#include "../utility/Button.h"
 
 #include "../../domain/entities/ButtonsInterfaceBase.h"
 
@@ -23,6 +23,11 @@ extern "C"
             ButtonsInterface();
             void begin();
             void loop();
+
+            virtual bool hasNext() { return true; }
+            virtual bool hasPrevious() { return false; }
+            virtual bool hasSelect() { return true; }
+            virtual bool hasBack() { return false; }
 
         private:
             Button _buttonNext = Button(BUTTON_NEXT_PIN, true, DEBOUNCE_MS);

@@ -20,7 +20,7 @@ namespace Domain::Entities
     {
         std::shared_ptr<DisplayInterfaceBase> displayInterface;
         std::shared_ptr<ButtonsInterfaceBase> buttonsInterface;
-        std::shared_ptr<PowerManagementInterfaceBase> powerManagement;
+        std::shared_ptr<PowerManagementInterfaceBase> powerManagementInterface;
         std::shared_ptr<KeyboardInterfaceBase> keyboardInterface;
         std::shared_ptr<BatteryInterfaceBase> batteryInterface;
         std::shared_ptr<WifiInterfaceBase> wifiInterface;

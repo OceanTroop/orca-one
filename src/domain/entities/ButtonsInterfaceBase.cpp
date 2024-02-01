@@ -9,20 +9,24 @@ InterfaceType ButtonsInterfaceBase::getType()
 
 void ButtonsInterfaceBase::registerOnClickPrevious(std::function<void()> handler)
 {
-    this->_onClickPrevious.addHandler(handler);
+    if (this->hasPrevious())
+        this->_onClickPrevious.addHandler(handler);
 }
 
 void ButtonsInterfaceBase::registerOnClickSelect(std::function<void()> handler)
 {
-    this->_onClickSelect.addHandler(handler);
+    if (this->hasSelect())
+        this->_onClickSelect.addHandler(handler);
 }
 
 void ButtonsInterfaceBase::registerOnClickBack(std::function<void()> handler)
 {
-    this->_onClickBack.addHandler(handler);
+    if (this->hasBack())
+        this->_onClickBack.addHandler(handler);
 }
 
 void ButtonsInterfaceBase::registerOnClickNext(std::function<void()> handler)
 {
-    this->_onClickNext.addHandler(handler);
+    if (this->hasNext())
+        this->_onClickNext.addHandler(handler);
 }

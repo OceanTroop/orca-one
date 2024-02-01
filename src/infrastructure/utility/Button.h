@@ -1,4 +1,3 @@
-#ifdef M5STICKCPLUS
 /*----------------------------------------------------------------------*
  * Arduino Button Library v1.0                                          *
  * Jack Christensen Mar 2012                                            *
@@ -44,5 +43,4 @@ class Button {
     uint32_t _pressTime;   // press time
     uint32_t _hold_time;   // hold time call wasreleasefor
 };
-#endif
 #endif

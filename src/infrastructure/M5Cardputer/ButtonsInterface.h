@@ -4,7 +4,7 @@
 
 #include <memory>
 
-#include "utility/Button.h"
+#include "../utility/Button.h"
 #include "../../domain/entities/DeviceBase.h"
 #include "../../domain/entities/ButtonsInterfaceBase.h"
 #include "../../domain/entities/KeyboardInterfaceBase.h"
@@ -26,6 +26,11 @@ extern "C"
             ButtonsInterface();
             void begin();
             void loop();
+
+            virtual bool hasNext() { return true; }
+            virtual bool hasPrevious() { return true; }
+            virtual bool hasSelect() { return true; }
+            virtual bool hasBack() { return true; }
 
         private:
             std::shared_ptr<KeyboardInterfaceBase> _keyboard = nullptr;

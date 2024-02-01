@@ -30,8 +30,8 @@ void DeviceBase::begin()
     if (this->interfaces.displayInterface != nullptr)
         this->interfaces.displayInterface->begin();
 
-    if (this->interfaces.powerManagement != nullptr)
-        this->interfaces.powerManagement->begin();
+    if (this->interfaces.powerManagementInterface != nullptr)
+        this->interfaces.powerManagementInterface->begin();
 
     if (this->interfaces.batteryInterface != nullptr)
         this->interfaces.batteryInterface->begin();
@@ -68,8 +68,8 @@ void DeviceBase::loop()
     if (this->interfaces.displayInterface != nullptr)
         this->interfaces.displayInterface->loop();
 
-    if (this->interfaces.powerManagement != nullptr)
-        this->interfaces.powerManagement->loop();
+    if (this->interfaces.powerManagementInterface != nullptr)
+        this->interfaces.powerManagementInterface->loop();
 
     if (this->interfaces.batteryInterface != nullptr)
         this->interfaces.batteryInterface->loop();
@@ -108,7 +108,7 @@ bool DeviceBase::hasInterface(InterfaceType type)
     case InterfaceType::Display:
         return this->interfaces.displayInterface != nullptr;
     case InterfaceType::PowerManagement:
-        return this->interfaces.powerManagement != nullptr;
+        return this->interfaces.powerManagementInterface != nullptr;
     case InterfaceType::Battery:
         return this->interfaces.batteryInterface != nullptr;
     case InterfaceType::Wifi:
