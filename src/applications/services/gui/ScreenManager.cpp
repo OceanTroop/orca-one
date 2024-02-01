@@ -55,11 +55,25 @@ void ScreenManager::render()
     this->render(this->_tft);
 }
 
-void ScreenManager::setCurrentScreen(Screen *currentScreen)
+void ScreenManager::setCurrentScreen(Screen *newScreen)
 {
-    currentScreen->setPreviousScreen(ScreenManager::getCurrent()->_currentScreen);
-    ScreenManager::getCurrent()->_currentScreen = currentScreen;
-    ScreenManager::getCurrent()->render();
+    auto manager = ScreenManager::getCurrent();
+    bool isBack = manager->_currentScreen != nullptr && manager->_currentScreen->getPreviousScreen() == newScreen ? true : false;
+
+    if (isBack)
+    {
+        auto screenToDelete = manager->_currentScreen;
+        manager->_currentScreen = nullptr;
+        delete screenToDelete;
+    }
+    else
+    {
+        newScreen->setPreviousScreen(manager->_currentScreen);
+    }
+
+    manager->_currentScreen = newScreen;
+
+    manager->render();
 }
 
 void ScreenManager::setToPreviousScreen()

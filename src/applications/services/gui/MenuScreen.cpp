@@ -25,6 +25,11 @@ MenuScreen::MenuScreen(std::shared_ptr<TFT_eSPI> tft) : Screen(tft)
 {
 }
 
+MenuScreen::~MenuScreen()
+{
+    this->_items.clear();
+}
+
 void MenuScreen::render(std::shared_ptr<TFT_eSPI> tft)
 {
     tft->fillScreen(TFT_BLACK);

@@ -25,6 +25,7 @@ extern "C"
 
         public:
             MenuScreen(std::shared_ptr<TFT_eSPI> tft);
+            ~MenuScreen();
 
             void render(std::shared_ptr<TFT_eSPI> tft);
             void addItem(MenuItem item);

@@ -6,7 +6,7 @@
 
 #if defined(M5STICKCPLUS1_1)
 #include "PowerManagementInterface.h"
-#define std ::make_shared<PowerManagementInterface>()
+#define POWER_MANAGEMENT_INTERFACE std::make_shared<PowerManagementInterface>()
 #elif defined(M5STICKCPLUS2)
 #define POWER_MANAGEMENT_INTERFACE nullptr
 #endif

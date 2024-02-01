@@ -1,3 +1,5 @@
+#ifdef M5CARDPUTER
+
 #include "KeyboardInterface.h"
 
 using namespace Infrastructure::M5Cardputer;
@@ -32,3 +34,5 @@ bool KeyboardInterface::capslocked()
 {
     return this->Keyboard.capslocked();
 }
+
+#endif

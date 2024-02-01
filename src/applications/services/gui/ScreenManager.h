@@ -26,7 +26,7 @@
             ScreenManager(std::shared_ptr<TFT_eSPI> tft);
 
             static ScreenManager *getCurrent();
-            static void setCurrentScreen(Screen *currentScreen);
+            static void setCurrentScreen(Screen *newScreen);
             static void setToPreviousScreen();
 
             template <typename T>
