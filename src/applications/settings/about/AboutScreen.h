@@ -1,6 +1,6 @@
 #pragma once
 
-#include "..\..\services\gui\Screen.h"
+#include "../../services/gui/Screen.h"
 
 using namespace Applications::Services::GUI;
 

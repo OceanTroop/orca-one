@@ -1,6 +1,6 @@
 #pragma once
 
-#include "..\..\AppBase.h"
+#include "../../AppBase.h"
 
 using namespace Applications;
 

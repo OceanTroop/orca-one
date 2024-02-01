@@ -22,6 +22,7 @@ void AboutScreen::render(std::shared_ptr<TFT_eSPI> tft)
     tft->setTextSize(1);
     tft->println("");
     tft->println(" Device: " + deviceName);
+    tft->println(" Version: " + BUILD_NUMBER);
     tft->println("");
     tft->println(" Contributors:");
     tft->println("   @cyberjulio");

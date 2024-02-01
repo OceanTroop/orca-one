@@ -1,6 +1,6 @@
 #include "MainMenuScreen.h"
-#include "..\..\AppUtils.h"
-#include "..\..\settings\about\AboutApp.h"
+#include "../../AppUtils.h"
+#include "../../settings/about/AboutApp.h"
 
 using namespace Applications::Services::GUI;
 using namespace Applications;
