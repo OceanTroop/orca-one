@@ -4,7 +4,6 @@ using namespace Domain::Entities;
 
 SdCardInterfaceBase::SdCardInterfaceBase()
 {
-    this->_spi = new SPIClass(SDCARD_SPI_BUS);
 }
 
 InterfaceType SdCardInterfaceBase::getType()
@@ -18,9 +17,12 @@ void SdCardInterfaceBase::loop()
 
 void SdCardInterfaceBase::begin()
 {
+    this->_spi = new SPIClass(SDCARD_SPI_BUS);
+    this->_spi->begin(SDCARD_SCK, SDCARD_MISO, SDCARD_MOSI, SDCARD_CS);
+
     this->_initialized = SD.begin(SDCARD_CS, *(this->_spi));
 
-    if (this-_initialized)
+    if (this->_initialized)
     {
         Serial.println("SDCard Initialized.");
     }
