@@ -43,6 +43,7 @@ extern "C"
             bool isSelected();
             void setOnClick(std::function<void()> onClick);
             void click();
+            bool isDefinedOnClick();
         };
     }
 

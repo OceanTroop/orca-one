@@ -82,6 +82,11 @@ void ButtonMenu::click()
         this->_onClick();
 }
 
+bool ButtonMenu::isDefinedOnClick()
+{
+    return this->_onClick != nullptr;
+}
+
 void ButtonMenu::setOnClick(std::function<void()> onClick)
 {
     this->_onClick = onClick;

@@ -1,4 +1,5 @@
 #include "MenuScreen.h"
+#include "ComingSoonScreen.h"
 
 using namespace Applications::Services::GUI;
 
@@ -33,7 +34,7 @@ MenuScreen::~MenuScreen()
 void MenuScreen::render(std::shared_ptr<TFT_eSPI> tft)
 {
     tft->fillScreen(TFT_BLACK);
-    
+
     auto displayInterface = DeviceBase::getCurrent()->getInterfaces().displayInterface;
     auto displaySettings = displayInterface->getSettings();
 
@@ -164,8 +165,12 @@ void MenuScreen::buttonSelectPressed()
 
         ScreenManager::setCurrentScreen(subMenuScreen);
     }
-    else
+    else if (currentItem->isDefinedOnClick())
     {
         currentItem->click();
+    }
+    else
+    {
+        ScreenManager::setCurrentScreen(new ComingSoonScreen(this->_tft));
     }
 }
