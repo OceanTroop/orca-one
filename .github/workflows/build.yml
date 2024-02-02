@@ -27,7 +27,7 @@ jobs:
       #   run: python update_platformio_ini.py
 
       - name: Set Build Number in platformio.ini
-        run: sed -i "s/\[_BUILD_NUMBER_\]/${{ github.run_number }}/g" platformio.ini
+        run: sed -i "s/\[_BUILD_NUMBER_\]/v0.0.${{ github.run_number }}/g" platformio.ini
 
       - name: Install PlatformIO Core
         run: |
@@ -42,7 +42,7 @@ jobs:
           for file in $(find .pio/build/*/ -name 'firmware.bin'); do
             version=$(echo ${{ github.run_number }})
             env=$(basename $(dirname "$file"))
-            new_name="OrcaOne_$env_v$version.bin"
+            new_name="OrcaOne_$env_v0.0.$version.bin"
             mv "$file" "$(dirname "$file")/$new_name"
           done
 
@@ -52,8 +52,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.RELEASES_TOKEN }}
         with:
-          tag_name: v${{ github.run_number }}
-          release_name: Release v${{ github.run_number }}
+          tag_name: v0.0.${{ github.run_number }}
+          release_name: Release v0.0.${{ github.run_number }}
           draft: false
           prerelease: false
           body: |
@@ -64,4 +64,4 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: binaries
-          path: .pio/build/*/*.bin
+          path: .pio/build/**/*.bin
