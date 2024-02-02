@@ -39,12 +39,13 @@ jobs:
 
       - name: Rename firmware.bin files
         run: |
-          for file in $(find .pio/build/*/ -name 'firmware.bin'); do
+          for file in $(find .pio/build/**/ -name 'firmware.bin'); do
             version=$(echo ${{ github.run_number }})
             env=$(basename $(dirname "$file"))
             new_name="OrcaOne_$env_v0.0.$version.bin"
             mv "$file" "$(dirname "$file")/$new_name"
           done
+          ls .pio/build/**/*.bin
 
       - name: Create Release
         id: create_release
