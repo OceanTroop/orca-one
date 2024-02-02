@@ -7,8 +7,24 @@ using namespace Applications;
 
 MainMenuScreen::MainMenuScreen(std::shared_ptr<TFT_eSPI> tft) : MenuScreen(tft)
 {
-    MenuItem appsMenuItem("appsMenuItem", "Apps");
+    this->addItem(newAppsMainMenuItem());
+    this->addItem(newWifiMainMenuItem());
+    this->addItem(newBluetoothMainMenuItem());
+    this->addItem(newSubGhzMainMenuItem());
+    this->addItem(newNfcMainMenuItem());
+    this->addItem(newInfraredMainMenuItem());
+    this->addItem(newBadUsbMainMenuItem());
+    this->addItem(newSettingsMainMenuItem());
+}
 
+MenuItem MainMenuScreen::newAppsMainMenuItem()
+{
+    MenuItem appsMenuItem("appsMenuItem", "Apps");
+    return appsMenuItem;
+}
+
+MenuItem MainMenuScreen::newWifiMainMenuItem()
+{
     MenuItem wifiMenuItem("wifiMenuItem", "Wifi");
     MenuItem wifiScanAPsSubMenuItem("wifiScanAPsSubMenuItem", "Scan APs");
     MenuItem wifiSpamSubMenuItem("wifiSpamSubMenuItem", "SPAM APs");
@@ -18,17 +34,41 @@ MainMenuScreen::MainMenuScreen(std::shared_ptr<TFT_eSPI> tft) : MenuScreen(tft)
     wifiMenuItem.addItem(wifiSpamSubMenuItem);
     wifiMenuItem.addItem(wifiDeautherSubMenuItem);
     wifiMenuItem.addItem(wifiEvilPortalSubMenuItem);
+    return wifiMenuItem;
+}
 
+MenuItem MainMenuScreen::newBluetoothMainMenuItem()
+{
     MenuItem bluetoothMenuItem("bluetoothMenuItem", "Bluetooth");
+    return bluetoothMenuItem;
+}
 
+MenuItem MainMenuScreen::newSubGhzMainMenuItem()
+{
     MenuItem subGhzMenuItem("subGhzMenuItem", "Sub-GHz");
+    return subGhzMenuItem;
+}
 
+MenuItem MainMenuScreen::newNfcMainMenuItem()
+{
     MenuItem nfcMenuItem("nfcMenuItem", "NFC");
+    return nfcMenuItem;
+}
 
+MenuItem MainMenuScreen::newInfraredMainMenuItem()
+{
     MenuItem infraredMenuItem("infraredMenuItem", "Infrared");
+    return infraredMenuItem;
+}
 
+MenuItem MainMenuScreen::newBadUsbMainMenuItem()
+{
     MenuItem badUsbMenuItem("badUsbMenuItem", "Bad USB");
+    return badUsbMenuItem;
+}
 
+MenuItem MainMenuScreen::newSettingsMainMenuItem()
+{
     MenuItem settingsMenuItem("settingsMenuItem", "Settings");
 
     MenuItem settingsLanguageSubMenuItem("settingsLanguageSubMenuItem", "Language");
@@ -42,13 +82,5 @@ MainMenuScreen::MainMenuScreen(std::shared_ptr<TFT_eSPI> tft) : MenuScreen(tft)
     settingsAboutSubMenuItem.setOnClick([]()
                                         { AppUtils::runApplication<Applications::Settings::About::AboutApp>(); });
     settingsMenuItem.addItem(settingsAboutSubMenuItem);
-
-    this->addItem(appsMenuItem);
-    this->addItem(wifiMenuItem);
-    this->addItem(bluetoothMenuItem);
-    this->addItem(subGhzMenuItem);
-    this->addItem(nfcMenuItem);
-    this->addItem(infraredMenuItem);
-    this->addItem(badUsbMenuItem);
-    this->addItem(settingsMenuItem);
+    return settingsMenuItem;
 }

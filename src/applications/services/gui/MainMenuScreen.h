@@ -12,6 +12,16 @@ extern "C"
     {
         class MainMenuScreen : public MenuScreen
         {
+        private:
+            MenuItem newAppsMainMenuItem();
+            MenuItem newWifiMainMenuItem();
+            MenuItem newBluetoothMainMenuItem();
+            MenuItem newSubGhzMainMenuItem();
+            MenuItem newNfcMainMenuItem();
+            MenuItem newInfraredMainMenuItem();
+            MenuItem newBadUsbMainMenuItem();
+            MenuItem newSettingsMainMenuItem();
+
         public:
             MainMenuScreen(std::shared_ptr<TFT_eSPI> tft);
         };
