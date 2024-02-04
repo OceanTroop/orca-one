@@ -6,6 +6,7 @@ using namespace Infrastructure::M5Cardputer;
 #elif defined(M5STICKCPLUS)
 
 #include "infrastructure/M5StickCPlus/Device.h"
+#include "infrastructure/M5StickCPlus/M5StickCPlus2.h"
 using namespace Infrastructure::M5StickCPlus;
 
 #endif
