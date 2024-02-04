@@ -42,10 +42,10 @@ jobs:
           for file in $(find .pio/build/**/ -name 'firmware.bin'); do
             version=$(echo ${{ github.run_number }})
             env=$(basename $(dirname "$file"))
-            new_name="OrcaOne_$env_v0.0.$version.bin"
+            new_name="OrcaOne_${env}_v0.0.$version.bin"
             mv "$file" "$(dirname "$file")/$new_name"
           done
-          ls .pio/build/**/*.bin
+          ls .pio/build/**/OrcaOne*.bin
 
       - name: Create Release
         id: create_release
@@ -65,4 +65,4 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: binaries
-          path: .pio/build/**/*.bin
+          path: .pio/build/**/OrcaOne*.bin
