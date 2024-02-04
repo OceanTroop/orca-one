@@ -7,6 +7,7 @@ void ComingSoonScreen::render(std::shared_ptr<TFT_eSPI> tft)
     tft->setTextColor(TFT_GREEN);
     tft->setTextDatum(TL_DATUM);
     tft->setTextSize(2);
+    tft->setCursor(0, 0);
     tft->println("");
     tft->println("Coming Soon...");
     tft->println("");

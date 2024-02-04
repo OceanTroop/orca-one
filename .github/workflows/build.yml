@@ -45,6 +45,7 @@ jobs:
             new_name="OrcaOne_${env}_v0.0.$version.bin"
             mv "$file" "$(dirname "$file")/$new_name"
           done
+          chmod +r .pio/build/**/OrcaOne*.bin
           ls .pio/build/**/OrcaOne*.bin
 
       - name: Create Release
