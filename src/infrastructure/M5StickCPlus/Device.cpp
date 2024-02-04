@@ -3,19 +3,13 @@
 #include "Device.h"
 #include "DisplayInterface.h"
 #include "ButtonsInterface.h"
-
-#if defined(M5STICKCPLUS1_1)
 #include "PowerManagementInterface.h"
-#define POWER_MANAGEMENT_INTERFACE std::make_shared<PowerManagementInterface>()
-#elif defined(M5STICKCPLUS2)
-#define POWER_MANAGEMENT_INTERFACE nullptr
-#endif
 
 using namespace Infrastructure::M5StickCPlus;
 
 Device::Device() : DeviceBase({std::make_shared<DisplayInterface>(),
                                std::make_shared<ButtonsInterface>(),
-                               POWER_MANAGEMENT_INTERFACE})
+                               std::make_shared<PowerManagementInterface>()})
 {
 }
 
