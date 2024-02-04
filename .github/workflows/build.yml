@@ -65,5 +65,4 @@ jobs:
         id: upload_binaries
         uses: actions/upload-artifact@v2
         with:
-          name: binaries
           path: .pio/build/**/OrcaOne*.bin
