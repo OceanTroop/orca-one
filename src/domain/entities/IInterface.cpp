@@ -11,3 +11,8 @@ void IInterface::disable()
 {
     this->_active = false;
 }
+
+bool IInterface::isActive()
+{
+    return this->_active;
+}

@@ -1,5 +1,6 @@
 #pragma once
 
+#include <Arduino.h>
 #include "InterfaceType.h"
 
 #ifdef __cplusplus
@@ -20,6 +21,7 @@ extern "C"
 
             virtual void enable();
             virtual void disable();
+            virtual bool isActive();
         };
     }
 #ifdef __cplusplus

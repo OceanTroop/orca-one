@@ -13,6 +13,10 @@ extern "C"
         {
         public:
             InterfaceType getType();
+            IRSend *getIRSend();
+
+        protected:
+            IRsend *_irSend;
         };
     }
 #ifdef __cplusplus
