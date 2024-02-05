@@ -1,5 +1,7 @@
 #pragma once
 
+#include <IRsend.h>
+
 #include "IInterface.h"
 #include "InterfaceType.h"
 
@@ -11,12 +13,18 @@ extern "C"
     {
         class InfraredInterfaceBase : public IInterface
         {
-        public:
-            InterfaceType getType();
-            IRSend *getIRSend();
-
-        protected:
+        private:
             IRsend *_irSend;
+            int _infraredPin;
+            bool _inverted;
+
+        public:
+            InfraredInterfaceBase(int infraredPin, bool inverted);
+            InterfaceType getType();
+            IRsend *getIRSend();
+            virtual void begin();
+            virtual void enable();
+            virtual void disable();
         };
     }
 #ifdef __cplusplus

@@ -13,8 +13,8 @@ Device::Device() : DeviceBase({std::make_shared<DisplayInterface>(),
                                std::make_shared<ButtonsInterface>(),
                                std::make_shared<PowerManagementInterface>(),
                                nullptr,
-                               std::make_shared<LedInterface>(),
-                               std::make_shared<InfraredInterface>()})
+                               std::make_shared<InfraredInterface>(),
+                               std::make_shared<LedInterface>()})
 {
 }
 

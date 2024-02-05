@@ -1,8 +1,8 @@
-#ifdef M5STICKCPLUS
+#ifdef M5CARDPUTER
 
 #include "InfraredInterface.h"
 
-using namespace Infrastructure::M5StickCPlus;
+using namespace Infrastructure::M5Cardputer;
 
 void InfraredInterface::begin()
 {
