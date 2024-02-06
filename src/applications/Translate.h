@@ -3,25 +3,22 @@
 #include <WString.h>
 #include <map>
 
+#include "../domain/entities/Language.h"
+using namespace Domain::Entities;
+
 #ifdef __cplusplus
 extern "C"
 {
 #endif
     namespace Applications
     {
-        enum TranslateLanguage
-        {
-            English,
-            PortuguesBrazil
-        };
-
         class Translate
         {
         protected:
             std::map<String, String> _texts;
 
         public:
-            virtual TranslateLanguage getLanguage() = 0;
+            virtual Language getLanguage() = 0;
 
             String t(String key)
             {

@@ -33,7 +33,7 @@ MenuScreen::~MenuScreen()
 
 void MenuScreen::render(std::shared_ptr<TFT_eSPI> tft)
 {
-    tft->fillScreen(TFT_BLACK);
+    tft->fillScreen(DEFAULT_BACKGROUND_COLOR);
 
     auto displayInterface = DeviceBase::getCurrent()->getInterfaces().displayInterface;
     auto displaySettings = displayInterface->getSettings();

@@ -2,6 +2,7 @@
 
 #include <Arduino.h>
 #include "InterfaceType.h"
+#include "../../Consts.h"
 
 #ifdef __cplusplus
 extern "C"

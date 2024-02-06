@@ -16,9 +16,9 @@ extern "C"
         public:
             TranslateEnglish();
 
-            TranslateLanguage getLanguage()
+            Language getLanguage()
             {
-                return TranslateLanguage::English;
+                return Language::English;
             }
         };
     }
