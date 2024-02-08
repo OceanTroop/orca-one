@@ -8,7 +8,7 @@ using namespace Domain::Entities;
 
 void AboutScreen::render(std::shared_ptr<TFT_eSPI> tft)
 {
-    auto device = DeviceBase::getCurrent();
+    auto device = DeviceBase::getInstance();
     auto displayInterface = device->getInterfaces().displayInterface;
     auto deviceName = device->getName();
 
@@ -17,7 +17,7 @@ void AboutScreen::render(std::shared_ptr<TFT_eSPI> tft)
 
     tft->setCursor(5, 0);
 
-    tft->setTextSize(displayInterface->getTextSizeBig());
+    tft->setTextSize(displayInterface->getTextSizeMedium());
     tft->println("  Orca One");
 
     tft->setTextSize(displayInterface->getTextSizeTiny());

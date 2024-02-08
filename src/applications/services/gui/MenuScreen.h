@@ -20,8 +20,10 @@ extern "C"
             int _currentItemIndex = -1;
             std::vector<MenuItem> _items = std::vector<MenuItem>();
             Scrollbar _scrollbar;
-            MenuItem *getCurrentItem();
-            MenuItem newBackItem();
+
+        protected:
+            virtual MenuItem *getCurrentItem();
+            virtual MenuItem newBackItem();
 
         public:
             MenuScreen(std::shared_ptr<TFT_eSPI> tft);

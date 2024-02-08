@@ -16,7 +16,7 @@ namespace Domain::Entities
     public:
         DeviceBase(Interfaces _interfaces);
 
-        static DeviceBase *getCurrent();
+        static DeviceBase *getInstance();
 
         virtual String getName() = 0;
         virtual void begin();
@@ -25,7 +25,7 @@ namespace Domain::Entities
         virtual Interfaces getInterfaces();
 
     private:
-        static DeviceBase *_current;
+        static DeviceBase *_instance;
         static bool _initialized;
 
     protected:

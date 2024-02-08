@@ -18,6 +18,7 @@ extern "C"
         {
         protected:
             int _borderColor = DEFAULT_PRIMARY_COLOR;
+            int _backgroundColor = DEFAULT_BACKGROUND_COLOR;
             int _progressColor = DEFAULT_PRIMARY_COLOR;
             int _textColor = DEFAULT_PRIMARY_COLOR;
             int _invertedTextColor = DEFAULT_INVERTED_COLOR;
@@ -32,6 +33,7 @@ extern "C"
             void render(std::shared_ptr<TFT_eSPI> tft);
 
             void setBorderColor(int color);
+            void setBackgroundColor(int color);
             void setProgressColor(int color);
             void setTextColor(int color);
             void setInvertedTextColor(int color);

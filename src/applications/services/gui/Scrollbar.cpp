@@ -6,7 +6,7 @@ using namespace Domain::Entities;
 
 void Scrollbar::render(std::shared_ptr<TFT_eSPI> tft)
 {
-    auto displayInterface = DeviceBase::getCurrent()->getInterfaces().displayInterface;
+    auto displayInterface = DeviceBase::getInstance()->getInterfaces().displayInterface;
     auto displaySettings = displayInterface->getSettings();
 
     tft->fillRect(displaySettings.width - 9, 0, 2, displaySettings.height, DEFAULT_PRIMARY_COLOR);

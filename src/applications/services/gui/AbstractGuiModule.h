@@ -3,6 +3,8 @@
 #include <memory>
 #include <WString.h>
 #include <TFT_eSPI.h>
+#include <freertos/FreeRTOS.h>
+#include <freertos/task.h>
 
 #include "../../../Consts.h"
 
@@ -25,6 +27,7 @@ extern "C"
             virtual void setTextSizeMedium(std::shared_ptr<TFT_eSPI> tft);
             virtual void setTextSizeSmall(std::shared_ptr<TFT_eSPI> tft);
             virtual void setTextSizeTiny(std::shared_ptr<TFT_eSPI> tft);
+            virtual void drawBorderedText(std::shared_ptr<TFT_eSPI> tft, String text, int x, int y, int borderSize, uint16_t textColor, uint16_t borderColor);
         };
     }
 #ifdef __cplusplus

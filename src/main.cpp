@@ -1,34 +1,17 @@
-#if defined(M5CARDPUTER)
+#include "DeviceSelect.h"
+#include "applications/taskmanager/TaskManager.h"
 
-#include "infrastructure/M5Cardputer/Device.h"
-using namespace Infrastructure::M5Cardputer;
+using namespace Applications;
 
-#elif defined(M5STICKCPLUS)
-
-#include "infrastructure/M5StickCPlus/Device.h"
-using namespace Infrastructure::M5StickCPlus;
-
-#endif
-
-#include "applications/services/gui/MainMenuScreen.h"
-using namespace Applications::Services::GUI;
-
-Device device = Device();
+TaskManager *taskManager;
 
 void setup()
 {
-  device.begin();
-
-  auto displayInterface = device.getInterfaces().displayInterface;
-  auto tft = displayInterface->getTFT();
-
-  ScreenManager *screenManager = new ScreenManager(tft);
-  MainMenuScreen *mainMenuScreen = new MainMenuScreen(tft);
-
-  screenManager->setCurrentScreen(mainMenuScreen);
+  taskManager = new TaskManager();
+  taskManager->begin();
 }
 
 void loop()
 {
-  device.loop();
+  taskManager->loop();
 }

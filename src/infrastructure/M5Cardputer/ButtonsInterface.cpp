@@ -15,7 +15,7 @@ void ButtonsInterface::begin()
 void ButtonsInterface::loop()
 {
     if (this->_keyboard == nullptr)
-        this->_keyboard = DeviceBase::getCurrent()->getInterfaces().keyboardInterface;
+        this->_keyboard = DeviceBase::getInstance()->getInterfaces().keyboardInterface;
 
     if (this->_keyboard->isKeyPressed(';'))
         this->_onClickPrevious.fireEvent();

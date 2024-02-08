@@ -8,7 +8,7 @@ using namespace Domain::Entities;
 
 void ButtonMenu::render(std::shared_ptr<TFT_eSPI> tft)
 {
-    auto displayInterface = DeviceBase::getCurrent()->getInterfaces().displayInterface;
+    auto displayInterface = DeviceBase::getInstance()->getInterfaces().displayInterface;
     auto displaySettings = displayInterface->getSettings();
 
     // Draw button border
