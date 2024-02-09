@@ -8,18 +8,19 @@ using namespace Domain::Entities;
 
 void AboutScreen::render(std::shared_ptr<TFT_eSPI> tft)
 {
-    auto device = DeviceBase::getCurrent();
+    auto device = DeviceBase::getInstance();
+    auto displayInterface = device->getInterfaces().displayInterface;
     auto deviceName = device->getName();
 
-    tft->setTextColor(TFT_GREEN);
+    tft->setTextColor(DEFAULT_PRIMARY_COLOR);
     tft->setTextDatum(TL_DATUM);
 
     tft->setCursor(5, 0);
 
-    tft->setTextSize(3);
+    tft->setTextSize(displayInterface->getTextSizeMedium());
     tft->println("  Orca One");
 
-    tft->setTextSize(1);
+    tft->setTextSize(displayInterface->getTextSizeTiny());
     tft->println("");
     tft->println(" Device: " + deviceName);
     tft->println(" Version: " + String(BUILD_NUMBER));

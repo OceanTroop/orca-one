@@ -1,6 +1,7 @@
 #include "MainMenuScreen.h"
 #include "../../AppUtils.h"
 #include "../../settings/about/AboutApp.h"
+#include "../../infrared/tvbgone/TVBGoneApp.h"
 
 using namespace Applications::Services::GUI;
 using namespace Applications;
@@ -58,6 +59,12 @@ MenuItem MainMenuScreen::newNfcMainMenuItem()
 MenuItem MainMenuScreen::newInfraredMainMenuItem()
 {
     MenuItem infraredMenuItem("infraredMenuItem", "Infrared");
+
+    MenuItem infraredTVBGoneSubMenuItem("infraredTVBGoneSubMenuItem", "TV-B-Gone");
+    infraredTVBGoneSubMenuItem.setOnClick([]()
+                                        { AppUtils::runApplication<Applications::Infrared::TVBGone::TVBGoneApp>(); });
+    infraredMenuItem.addItem(infraredTVBGoneSubMenuItem);
+
     return infraredMenuItem;
 }
 

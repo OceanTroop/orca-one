@@ -8,7 +8,7 @@ using namespace Domain::Entities;
 
 void ButtonMenu::render(std::shared_ptr<TFT_eSPI> tft)
 {
-    auto displayInterface = DeviceBase::getCurrent()->getInterfaces().displayInterface;
+    auto displayInterface = DeviceBase::getInstance()->getInterfaces().displayInterface;
     auto displaySettings = displayInterface->getSettings();
 
     // Draw button border
@@ -23,7 +23,7 @@ void ButtonMenu::render(std::shared_ptr<TFT_eSPI> tft)
     else
         tft->setTextColor(this->_textColor);
 
-    tft->setTextSize(2);
+    this->setTextSizeSmall(tft);
     tft->setTextDatum(TL_DATUM);
 
     tft->drawString(this->_text, this->_x + 10, this->_y + 5);

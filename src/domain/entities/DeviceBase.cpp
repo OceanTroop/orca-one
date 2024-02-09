@@ -2,14 +2,14 @@
 
 using namespace Domain::Entities;
 
-DeviceBase *DeviceBase::_current = nullptr;
+DeviceBase *DeviceBase::_instance = nullptr;
 bool DeviceBase::_initialized = false;
 
 DeviceBase::DeviceBase(Interfaces interfaces)
 {
     if (DeviceBase::_initialized)
     {
-        throw std::runtime_error("Device previous initialized. Please, define Device only time. Use: DeviceBase::getCurrent()");
+        throw std::runtime_error("Device previous initialized. Please, define Device only time. Use: DeviceBase::getInstance()");
     }
 
     this->_interfaces = interfaces;
@@ -24,17 +24,18 @@ DeviceBase::DeviceBase(Interfaces interfaces)
         this->_interfaces.sdCardInterface = std::make_shared<SdCardInterfaceBase>();
 
     DeviceBase::_initialized = true;
-    DeviceBase::_current = this;
+    DeviceBase::_instance = this;
 }
 
-DeviceBase *DeviceBase::getCurrent()
+DeviceBase *DeviceBase::getInstance()
 {
-    return DeviceBase::_current;
+    return DeviceBase::_instance;
 }
 
 void DeviceBase::begin()
 {
     Serial.begin(115200);
+
 
     if (this->_interfaces.displayInterface != nullptr)
         this->_interfaces.displayInterface->begin();

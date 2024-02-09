@@ -4,7 +4,7 @@
 using namespace Applications::Services::GUI;
 using namespace Domain::Entities;
 
-ScreenManager *ScreenManager::_current = nullptr;
+ScreenManager *ScreenManager::_instance = nullptr;
 bool ScreenManager::_initialized = false;
 
 ScreenManager::ScreenManager(std::shared_ptr<TFT_eSPI> tft)
@@ -13,13 +13,13 @@ ScreenManager::ScreenManager(std::shared_ptr<TFT_eSPI> tft)
 
     if (ScreenManager::_initialized)
     {
-        throw std::runtime_error("ScreenManager previous initialized. Please, define ScreenManager only time. Use: ScreenManager::getCurrent()");
+        throw std::runtime_error("ScreenManager previous initialized. Please, define ScreenManager only time. Use: ScreenManager::getInstance()");
     }
 
     ScreenManager::_initialized = true;
-    ScreenManager::_current = this;
+    ScreenManager::_instance = this;
 
-    auto buttonsInterface = DeviceBase::getCurrent()->getInterfaces().buttonsInterface;
+    auto buttonsInterface = DeviceBase::getInstance()->getInterfaces().buttonsInterface;
 
     auto menuScreen = this;
 
@@ -41,13 +41,14 @@ ScreenManager::ScreenManager(std::shared_ptr<TFT_eSPI> tft)
 
 void ScreenManager::render(std::shared_ptr<TFT_eSPI> tft)
 {
-    tft->fillScreen(TFT_BLACK);
+    tft->fillScreen(DEFAULT_BACKGROUND_COLOR);
+    this->setTextSizeSmall(tft);
     this->_currentScreen->render(tft);
 }
 
-ScreenManager *ScreenManager::getCurrent()
+ScreenManager *ScreenManager::getInstance()
 {
-    return ScreenManager::_current;
+    return ScreenManager::_instance;
 }
 
 void ScreenManager::render()
@@ -57,7 +58,7 @@ void ScreenManager::render()
 
 void ScreenManager::setCurrentScreen(Screen *newScreen)
 {
-    auto manager = ScreenManager::getCurrent();
+    auto manager = ScreenManager::getInstance();
     bool isBack = manager->_currentScreen != nullptr && manager->_currentScreen->getPreviousScreen() == newScreen ? true : false;
 
     if (isBack)
@@ -78,11 +79,11 @@ void ScreenManager::setCurrentScreen(Screen *newScreen)
 
 void ScreenManager::setToPreviousScreen()
 {
-    if (ScreenManager::getCurrent()->_currentScreen->getPreviousScreen() != nullptr)
-        ScreenManager::setCurrentScreen(ScreenManager::getCurrent()->_currentScreen->getPreviousScreen());
+    if (ScreenManager::getInstance()->_currentScreen->getPreviousScreen() != nullptr)
+        ScreenManager::setCurrentScreen(ScreenManager::getInstance()->_currentScreen->getPreviousScreen());
 }
 
 Screen *ScreenManager::getCurrentScreen()
 {
-    return ScreenManager::getCurrent()->_currentScreen;
+    return ScreenManager::getInstance()->_currentScreen;
 }

@@ -6,8 +6,8 @@ std::shared_ptr<AppContext> AppContext::newAppContext()
 {
     auto context = std::make_shared<AppContext>();
 
-    context->setDevice(DeviceBase::getCurrent());
-    context->setScreeManager(ScreenManager::getCurrent());
+    context->setDevice(DeviceBase::getInstance());
+    context->setScreeManager(ScreenManager::getInstance());
 
     return context;
 }

@@ -21,6 +21,11 @@ extern "C"
             virtual void begin();
             virtual void loop();
             virtual const std::shared_ptr<TFT_eSPI> getTFT();
+            virtual int getTextSizeBig();
+            virtual int getTextSizeMedium();
+            virtual int getTextSizeSmall();
+            virtual int getTextSizeTiny();
+            
             virtual DisplaySettings getSettings() = 0;
 
         protected:

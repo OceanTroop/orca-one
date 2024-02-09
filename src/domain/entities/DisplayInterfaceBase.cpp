@@ -26,3 +26,23 @@ const std::shared_ptr<TFT_eSPI> Domain::Entities::DisplayInterfaceBase::getTFT()
 {
     return this->_tft;
 }
+
+int DisplayInterfaceBase::getTextSizeBig()
+{
+    return 4;
+}
+
+int DisplayInterfaceBase::getTextSizeMedium()
+{
+    return 3;
+}
+
+int DisplayInterfaceBase::getTextSizeSmall()
+{
+    return 2;
+}
+
+int DisplayInterfaceBase::getTextSizeTiny()
+{
+    return 1;
+}

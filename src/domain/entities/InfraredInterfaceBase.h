@@ -23,8 +23,10 @@ extern "C"
             InterfaceType getType();
             IRsend *getIRSend();
             virtual void begin();
+            virtual void loop();
             virtual void enable();
             virtual void disable();
+            virtual bool isInverted();
         };
     }
 #ifdef __cplusplus

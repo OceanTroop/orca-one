@@ -4,9 +4,9 @@ using namespace Applications::Services::GUI;
 
 void ComingSoonScreen::render(std::shared_ptr<TFT_eSPI> tft)
 {
-    tft->setTextColor(TFT_GREEN);
+    tft->setTextColor(DEFAULT_PRIMARY_COLOR);
     tft->setTextDatum(TL_DATUM);
-    tft->setTextSize(2);
+    this->setTextSizeSmall(this->_tft);
     tft->setCursor(0, 0);
     tft->println("");
     tft->println("Coming Soon...");

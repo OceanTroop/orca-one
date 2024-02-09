@@ -10,9 +10,10 @@ MenuItem *MenuScreen::getCurrentItem()
 
 MenuItem MenuScreen::newBackItem()
 {
-    auto action = [this]()
+    auto currentScreen = ScreenManager::getCurrentScreen();
+    auto action = [currentScreen]()
     {
-        ScreenManager::setCurrentScreen(this);
+        ScreenManager::setCurrentScreen(currentScreen);
     };
 
     auto item = MenuItem("backMenuItem", "Back");
@@ -33,9 +34,9 @@ MenuScreen::~MenuScreen()
 
 void MenuScreen::render(std::shared_ptr<TFT_eSPI> tft)
 {
-    tft->fillScreen(TFT_BLACK);
+    tft->fillScreen(DEFAULT_BACKGROUND_COLOR);
 
-    auto displayInterface = DeviceBase::getCurrent()->getInterfaces().displayInterface;
+    auto displayInterface = DeviceBase::getInstance()->getInterfaces().displayInterface;
     auto displaySettings = displayInterface->getSettings();
 
     int totalItems = this->_items.size();
