@@ -41,8 +41,6 @@ ScreenManager::ScreenManager(std::shared_ptr<TFT_eSPI> tft)
 
 void ScreenManager::render(std::shared_ptr<TFT_eSPI> tft)
 {
-    auto displayInterface = DeviceBase::getInstance()->getInterfaces().displayInterface;
-
     tft->fillScreen(DEFAULT_BACKGROUND_COLOR);
     this->setTextSizeSmall(tft);
     this->_currentScreen->render(tft);

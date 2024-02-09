@@ -26,8 +26,7 @@ extern "C"
         {
         public:
             InfraredInterface() : InfraredInterfaceBase(INFRARED_PIN, INFRARED_INVERTED) {}
-            void begin();
-            void loop();
+            
         };
     }
 #ifdef __cplusplus

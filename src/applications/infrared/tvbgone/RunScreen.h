@@ -1,5 +1,6 @@
 #pragma once
 
+#include "TVBGoneRegion.h"
 #include "TVBGoneType.h"
 #include "../../services/gui/Screen.h"
 #include "../../services/gui/ProgressBar.h"
@@ -19,12 +20,14 @@ extern "C"
         private:
             bool _isRunning = false;
             bool _stopping = false;
+            TVBGoneRegion _region;
             TVBGoneType _type;
             ProgressBar _progressBar;
 
         public:
-            RunScreen(TVBGoneType type, std::shared_ptr<TFT_eSPI> tft) : Screen(tft)
+            RunScreen(TVBGoneRegion region, TVBGoneType type, std::shared_ptr<TFT_eSPI> tft) : Screen(tft)
             {
+                this->_region = region;
                 this->_type = type;
             }
 
@@ -37,7 +40,7 @@ extern "C"
             void stop();
             void start();
 
-            void _execute();
+            void __execute__();
         };
     }
 

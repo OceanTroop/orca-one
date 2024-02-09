@@ -8,14 +8,16 @@ using namespace Applications::Services::GUI;
 TVBGoneMenuScreen::TVBGoneMenuScreen(std::shared_ptr<TFT_eSPI> tft) : MenuScreen(tft)
 {
     MenuItem regionAmericasAsia("regionAmericasAsia", "Americas / Asia");
+
     regionAmericasAsia.setOnClick([tft]()
-                                  { auto screen = new RunScreen(TVBGoneType::AmericasAsia, tft);
+                                         { auto screen = new RunScreen(TVBGoneRegion::AmericasAsia, TVBGoneType::Power, tft);
                                   ScreenManager::setCurrentScreen(screen);
                                   screen->start(); });
 
     MenuItem regionEMEA("regionEMEA", "EU/MidEast/Africa");
+
     regionEMEA.setOnClick([tft]()
-                          { auto screen = new RunScreen(TVBGoneType::EMEA, tft);
+                                 { auto screen = new RunScreen(TVBGoneRegion::EMEA, TVBGoneType::Power, tft);
                                   ScreenManager::setCurrentScreen(screen);
                                   screen->start(); });
 

@@ -1,4 +1,5 @@
 #include "RunScreen.h"
+#include "WorldTVPowerCodes.h"
 
 using namespace Applications::Infrared::TVBGone;
 
@@ -13,24 +14,70 @@ void RunScreen::stop()
     }
 }
 
-void RunScreen::_execute()
+void RunScreen::__execute__()
 {
     this->_isRunning = true;
     this->_stopping = false;
 
-    for (int i = 1; i <= 100; i++)
+    auto infraredInterface = DeviceBase::getInstance()->getInterfaces().infraredInterface;
+    auto irSend = infraredInterface->getIRSend();
+
+    if (this->_region == TVBGoneRegion::AmericasAsia)
     {
+        totalCodes = total_NAcodes;
+        region = NA;
+    }
+    else
+    {
+        totalCodes = total_EUcodes;
+        region = EU;
+    }
+
+    int lastProgress = 0;
+
+    for (int i = 0; i < totalCodes; i++)
+    {
+        powerCode = this->_region == TVBGoneRegion::AmericasAsia
+                        ? NApowerCodes[i]
+                        : EUpowerCodes[i];
+
+        const uint8_t freq = powerCode->timer_val;
+        const uint8_t numpairs = powerCode->numpairs;
+        const uint8_t bitcompression = powerCode->bitcompression;
+        code_ptr = 0;
+
+        for (uint8_t k = 0; k < numpairs; k++)
+        {
+            uint16_t ti;
+            ti = (read_bits(bitcompression)) * 2;
+
+            offtime = powerCode->times[ti];
+            ontime = powerCode->times[ti + 1];
+
+            rawData[k * 2] = offtime * 10;
+            rawData[(k * 2) + 1] = ontime * 10;
+        }
+
+        irSend->sendRaw(rawData, (numpairs * 2), freq);
+
+        bitsleft_r = 0;
+
+        auto progress = int((float)i / totalCodes * 100);
+
+        if (progress > lastProgress)
+        {
+            this->_progressBar.setProgress(progress);
+            this->_progressBar.render(this->_tft);
+            lastProgress = progress;
+        }
+
         if (this->_stopping)
             break;
 
-        this->_progressBar.setProgress(i);
-        this->_progressBar.render(this->_tft);
-
-        // delay(500);
-        vTaskDelay(pdMS_TO_TICKS(100));
-
-        // TODO
+        vTaskDelay(pdMS_TO_TICKS(500));
     }
+
+    infraredInterface->disable();
 
     this->_isRunning = false;
     this->_stopping = false;
@@ -39,7 +86,7 @@ void RunScreen::_execute()
 void taskDoExecute(void *screenPointer)
 {
     auto screen = (RunScreen *)screenPointer;
-    screen->_execute();
+    screen->__execute__();
 
     vTaskDelete(nullptr);
 }
@@ -49,24 +96,20 @@ void RunScreen::start()
     if (this->_isRunning)
         return;
 
-    xTaskCreatePinnedToCore(taskDoExecute, "taskDoExecute", configMINIMAL_STACK_SIZE + 1024, this, 1, nullptr, portNUM_PROCESSORS - 1);
+    xTaskCreatePinnedToCore(taskDoExecute, "taskDoExecute", configMINIMAL_STACK_SIZE + 2048, this, 1, nullptr, portNUM_PROCESSORS - 1);
 }
 
 void RunScreen::render(std::shared_ptr<TFT_eSPI> tft)
 {
     auto displayInterface = DeviceBase::getInstance()->getInterfaces().displayInterface;
     auto displaySettings = displayInterface->getSettings();
-    int margin = 10;
-    int height = 25;
 
     this->setTextSizeSmall(tft);
+    tft->setTextColor(DEFAULT_PRIMARY_COLOR);
 
-    String title;
-
-    if (this->_type == TVBGoneType::AmericasAsia)
-        title = "Americas / Asia";
-    else
-        title = "EU/MidEast/Africa";
+    String title = this->_region == TVBGoneRegion::AmericasAsia
+                       ? "Americas / Asia"
+                       : "EU/MidEast/Africa";
 
     auto titleX = (displaySettings.width - tft->textWidth(title)) / 2;
 
@@ -77,9 +120,11 @@ void RunScreen::render(std::shared_ptr<TFT_eSPI> tft)
     tft->setCursor(0, displaySettings.height - 35);
     tft->println("Press any button to stop");
 
+    int progressBarMargin = 10;
+    int progressBarHeight = 25;
     this->setTextSizeSmall(tft);
-    this->_progressBar.setPosition(margin, (displaySettings.height - height) / 2);
-    this->_progressBar.setSize(displaySettings.width - (margin * 2), height);
+    this->_progressBar.setPosition(progressBarMargin, (displaySettings.height - progressBarHeight) / 2);
+    this->_progressBar.setSize(displaySettings.width - (progressBarMargin * 2), progressBarHeight);
     this->_progressBar.setProgress(0);
     this->_progressBar.render(tft);
 }

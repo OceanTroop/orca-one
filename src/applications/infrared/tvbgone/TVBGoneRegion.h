@@ -6,9 +6,10 @@ extern "C"
 #endif
     namespace Applications::Infrared::TVBGone
     {
-        enum TVBGoneType
+        enum TVBGoneRegion
         {
-            Power
+            AmericasAsia,
+            EMEA
         };
     }
 

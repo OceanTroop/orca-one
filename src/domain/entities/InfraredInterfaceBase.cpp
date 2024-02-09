@@ -4,7 +4,6 @@ using namespace Domain::Entities;
 
 InfraredInterfaceBase::InfraredInterfaceBase(int infraredPin, bool inverted)
 {
-    this->_irSend = new IRsend(infraredPin, inverted);
     this->_infraredPin = infraredPin;
     this->_inverted = inverted;
 }
@@ -21,15 +20,29 @@ IRsend *InfraredInterfaceBase::getIRSend()
 
 void InfraredInterfaceBase::begin()
 {
+    pinMode(this->_infraredPin, OUTPUT);
+
+    this->_irSend = new IRsend(this->_infraredPin, this->_inverted);
     this->_irSend->begin();
+
+    this->disable();
 }
 
-void InfraredInterfaceBase::disable()
+void InfraredInterfaceBase::loop()
 {
-    digitalWrite(this->_infraredPin, this->_inverted ? LOW : HIGH);
 }
 
 void InfraredInterfaceBase::enable()
 {
+    digitalWrite(this->_infraredPin, this->_inverted ? LOW : HIGH);
+}
+
+void InfraredInterfaceBase::disable()
+{
     digitalWrite(this->_infraredPin, this->_inverted ? HIGH : LOW);
+}
+
+bool InfraredInterfaceBase::isInverted()
+{
+    return this->_inverted;
 }

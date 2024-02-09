@@ -53,5 +53,10 @@ void ProgressBar::setPosition(int x, int y)
 
 void ProgressBar::setProgress(int progress)
 {
+    if (progress < 0)
+        progress = 0;
+    else if (progress > 100)
+        progress = 100;
+        
     this->_progress = progress;
 }
