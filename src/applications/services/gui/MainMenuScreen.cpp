@@ -6,7 +6,7 @@
 using namespace Applications::Services::GUI;
 using namespace Applications;
 
-MainMenuScreen::MainMenuScreen(std::shared_ptr<TFT_eSPI> tft) : MenuScreen(tft)
+MainMenuScreen::MainMenuScreen(std::shared_ptr<TFT_eSPI> tft) : MenuScreen(tft, false)
 {
     this->addItem(newAppsMainMenuItem());
     this->addItem(newWifiMainMenuItem());
@@ -62,7 +62,7 @@ MenuItem MainMenuScreen::newInfraredMainMenuItem()
 
     MenuItem infraredTVBGoneSubMenuItem("infraredTVBGoneSubMenuItem", "TV-B-Gone");
     infraredTVBGoneSubMenuItem.setOnClick([]()
-                                        { AppUtils::runApplication<Applications::Infrared::TVBGone::TVBGoneApp>(); });
+                                          { AppUtils::runApplication<Applications::Infrared::TVBGone::TVBGoneApp>(); });
     infraredMenuItem.addItem(infraredTVBGoneSubMenuItem);
 
     return infraredMenuItem;

@@ -21,7 +21,6 @@ TVBGoneMenuScreen::TVBGoneMenuScreen(std::shared_ptr<TFT_eSPI> tft) : MenuScreen
                                   ScreenManager::setCurrentScreen(screen);
                                   screen->start(); });
 
-    this->addItem(this->newBackItem());
     this->addItem(regionAmericasAsia);
     this->addItem(regionEMEA);
 }

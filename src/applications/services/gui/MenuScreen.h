@@ -26,7 +26,7 @@ extern "C"
             virtual MenuItem newBackItem();
 
         public:
-            MenuScreen(std::shared_ptr<TFT_eSPI> tft);
+            MenuScreen(std::shared_ptr<TFT_eSPI> tft, bool hasParent = true);
             ~MenuScreen();
 
             void render(std::shared_ptr<TFT_eSPI> tft);

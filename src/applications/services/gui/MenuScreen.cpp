@@ -23,8 +23,10 @@ MenuItem MenuScreen::newBackItem()
     return item;
 }
 
-MenuScreen::MenuScreen(std::shared_ptr<TFT_eSPI> tft) : Screen(tft)
+MenuScreen::MenuScreen(std::shared_ptr<TFT_eSPI> tft, bool hasParent) : Screen(tft)
 {
+    if (hasParent)
+        this->addItem(this->newBackItem());
 }
 
 MenuScreen::~MenuScreen()
@@ -161,7 +163,6 @@ void MenuScreen::buttonSelectPressed()
     {
         auto subMenuScreen = new MenuScreen(this->_tft);
 
-        subMenuScreen->addItem(this->newBackItem());
         subMenuScreen->addItems(subItems);
 
         ScreenManager::setCurrentScreen(subMenuScreen);
