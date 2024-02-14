@@ -4,10 +4,12 @@
 #include <stdexcept>
 #include <vector>
 #include <memory>
+#include <FS.h>
 
 #include "Interfaces.h"
 #include "InterfaceType.h"
 #include "IInterface.h"
+#include "Settings.h"
 
 namespace Domain::Entities
 {
@@ -24,11 +26,14 @@ namespace Domain::Entities
         virtual bool hasInterface(InterfaceType type);
         virtual Interfaces getInterfaces();
 
+        void saveSettings();
+
     private:
         static DeviceBase *_instance;
         static bool _initialized;
 
     protected:
         Interfaces _interfaces;
+        Settings *_settings;
     };
 }

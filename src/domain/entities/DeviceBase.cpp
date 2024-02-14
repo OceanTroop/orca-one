@@ -1,5 +1,6 @@
 #include "DeviceBase.h"
 #include <LittleFS.h>
+#include <ArduinoJson.h>
 
 using namespace Domain::Entities;
 
@@ -39,6 +40,8 @@ void DeviceBase::begin()
 
     if (!LittleFS.begin(true))
         Serial.println("Failed to mount LittleFS");
+
+    this->_settings = Settings::fromFile(LittleFS, SETTINGS_FILE_NAME);
 
     if (this->_interfaces.displayInterface != nullptr)
         this->_interfaces.displayInterface->begin();
@@ -145,7 +148,12 @@ bool DeviceBase::hasInterface(InterfaceType type)
     }
 }
 
-Interfaces Domain::Entities::DeviceBase::getInterfaces()
+Interfaces DeviceBase::getInterfaces()
 {
     return this->_interfaces;
+}
+
+void DeviceBase::saveSettings()
+{
+    this->_settings->save(LittleFS, SETTINGS_FILE_NAME);
 }
