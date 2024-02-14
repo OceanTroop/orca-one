@@ -23,13 +23,15 @@ extern "C"
             int _textColor = DEFAULT_PRIMARY_COLOR;
             int _invertedTextColor = DEFAULT_INVERTED_COLOR;
             int _width = -1;
-            int _height = -1;
+            int _height = 25;
             int _x = -1;
             int _y = -1;
-            int _progress;
+            int _progress = 0;
             std::function<void()> _onClick = nullptr;
 
         public:
+            ProgressBar();
+
             void render(std::shared_ptr<TFT_eSPI> tft);
 
             void setBorderColor(int color);
@@ -37,9 +39,10 @@ extern "C"
             void setProgressColor(int color);
             void setTextColor(int color);
             void setInvertedTextColor(int color);
-            void setSize(int width, int height);
+            void setWidth(int width);
             void setPosition(int x, int y);
             void setProgress(int progress);
+            int getHeight();
         };
     }
 
