@@ -27,14 +27,6 @@ MenuItem MainMenuScreen::newAppsMainMenuItem()
 MenuItem MainMenuScreen::newWifiMainMenuItem()
 {
     MenuItem wifiMenuItem("wifiMenuItem", "Wifi");
-    MenuItem wifiScanAPsSubMenuItem("wifiScanAPsSubMenuItem", "Scan APs");
-    MenuItem wifiSpamSubMenuItem("wifiSpamSubMenuItem", "SPAM APs");
-    MenuItem wifiDeautherSubMenuItem("wifiDeautherSubMenuItem", "Deauther APs");
-    MenuItem wifiEvilPortalSubMenuItem("wifiEvilPortalSubMenuItem", "Evil Portal");
-    wifiMenuItem.addItem(wifiScanAPsSubMenuItem);
-    wifiMenuItem.addItem(wifiSpamSubMenuItem);
-    wifiMenuItem.addItem(wifiDeautherSubMenuItem);
-    wifiMenuItem.addItem(wifiEvilPortalSubMenuItem);
     return wifiMenuItem;
 }
 
@@ -60,6 +52,7 @@ MenuItem MainMenuScreen::newInfraredMainMenuItem()
 {
     MenuItem infraredMenuItem("infraredMenuItem", "Infrared");
 
+    //  TV-B-Gone
     MenuItem infraredTVBGoneSubMenuItem("infraredTVBGoneSubMenuItem", "TV-B-Gone");
     infraredTVBGoneSubMenuItem.setOnClick([]()
                                           { AppUtils::runApplication<Applications::Infrared::TVBGone::TVBGoneApp>(); });
@@ -78,6 +71,7 @@ MenuItem MainMenuScreen::newSettingsMainMenuItem()
 {
     MenuItem settingsMenuItem("settingsMenuItem", "Settings");
 
+    // Language
     MenuItem settingsLanguageSubMenuItem("settingsLanguageSubMenuItem", "Language");
     MenuItem settingsLanguageEnglishSubMenuItem("settingsLanguageEnglishSubMenuItem", "English");
     MenuItem settingsLanguagePortuguesBrasilSubMenuItem("settingsLanguagePortuguesBrasilSubMenuItem", "Português (BR)");
@@ -85,9 +79,15 @@ MenuItem MainMenuScreen::newSettingsMainMenuItem()
     settingsLanguageSubMenuItem.addItem(settingsLanguagePortuguesBrasilSubMenuItem);
     settingsMenuItem.addItem(settingsLanguageSubMenuItem);
 
+    // About
     MenuItem settingsAboutSubMenuItem("settingsAboutSubMenuItem", "About");
     settingsAboutSubMenuItem.setOnClick([]()
                                         { AppUtils::runApplication<Applications::Settings::About::AboutApp>(); });
     settingsMenuItem.addItem(settingsAboutSubMenuItem);
+
+    // Web UI
+    MenuItem settingsWebUISubMenuItem("settingsWebUISubMenuItem", "Web UI");
+    settingsMenuItem.addItem(settingsWebUISubMenuItem);
+
     return settingsMenuItem;
 }
