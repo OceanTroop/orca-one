@@ -1,6 +1,7 @@
 #include "Launcher.h"
 #include "../../domain/entities/DeviceBase.h"
 #include "../services/gui/MainMenuScreen.h"
+#include "../services/gui/SplashScreen.h"
 
 using namespace Applications;
 using namespace Applications::Services::GUI;
@@ -30,6 +31,7 @@ void Launcher::begin()
     auto tft = DeviceBase::getInstance()->getInterfaces().displayInterface->getTFT();
 
     this->_screenManager = new ScreenManager(tft);
+    this->_screenManager->setCurrentScreen(new SplashScreen(tft));
     this->_screenManager->setCurrentScreen(new MainMenuScreen(tft));
 }
 

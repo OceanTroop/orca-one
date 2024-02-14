@@ -1,4 +1,5 @@
 #include "DeviceBase.h"
+#include <LittleFS.h>
 
 using namespace Domain::Entities;
 
@@ -36,6 +37,8 @@ void DeviceBase::begin()
 {
     Serial.begin(115200);
 
+    if (!LittleFS.begin(true))
+        Serial.println("Failed to mount LittleFS");
 
     if (this->_interfaces.displayInterface != nullptr)
         this->_interfaces.displayInterface->begin();
