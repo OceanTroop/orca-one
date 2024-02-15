@@ -1,0 +1,13 @@
+{
+    "MainMenu_Apps": "Apps",
+    "MainMenu_Wifi": "Wifi",
+    "MainMenu_Bluetooth": "Bluetooth",
+    "MainMenu_SubGhz": "Sub-Ghz",
+    "MainMenu_Nfc": "NFC",
+    "MainMenu_Infrared": "Infravermelho",
+    "MainMenu_BadUSB": "Bad USB",
+    "MainMenu_Settings": "Configuracoes",
+    "MainMenu_Settings_Language": "Linguagem",
+    "MainMenu_Settings_Reboot": "Reiniciar",
+    "MainMenu_Settings_About": "Sobre"
+}

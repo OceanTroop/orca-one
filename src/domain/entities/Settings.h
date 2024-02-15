@@ -22,8 +22,6 @@ extern "C"
         private:
             String _deviceName;
             Language _language;
-
-            String serialize();
             void deserialize(String jsonString);
 
         public:
@@ -34,7 +32,11 @@ extern "C"
             void save(fs::FS &fs, const char *fileName);
 
             String getDeviceName();
+            void setDeviceName(String deviceName);
             Language getLanguage();
+            void setLanguage(Language language);
+
+            String serialize();
         };
     }
 #ifdef __cplusplus

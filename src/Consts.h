@@ -1,7 +1,9 @@
 #pragma once
 
 #include <TFT_eSPI.h>
+#include <LittleFS.h>
 
 #define DEFAULT_BACKGROUND_COLOR TFT_BLACK
 #define DEFAULT_PRIMARY_COLOR TFT_GREEN
 #define DEFAULT_INVERTED_COLOR TFT_BLACK
+#define SPIFFS_STORAGE LittleFS

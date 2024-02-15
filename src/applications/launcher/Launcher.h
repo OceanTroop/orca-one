@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../services/gui/ScreenManager.h"
+#include "../Translate.h"
 
 using ScreenManager = Applications::Services::GUI::ScreenManager;
 
@@ -16,6 +17,7 @@ extern "C"
             static Launcher *_instance;
             static bool _initialized;
             ScreenManager *_screenManager;
+            Translate *_translate;
 
         public:
             Launcher();
@@ -24,6 +26,8 @@ extern "C"
 
             void begin();
             void loop();
+
+            const Translate *getTranslate();
         };
     }
 

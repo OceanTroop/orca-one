@@ -14,7 +14,7 @@ void RunScreen::stop()
     }
 }
 
-void RunScreen::__execute__()
+void RunScreen::execute()
 {
     this->_isRunning = true;
     this->_stopping = false;
@@ -83,20 +83,17 @@ void RunScreen::__execute__()
     this->_stopping = false;
 }
 
-void taskDoExecute(void *screenPointer)
-{
-    auto screen = (RunScreen *)screenPointer;
-    screen->__execute__();
-
-    vTaskDelete(nullptr);
-}
-
 void RunScreen::start()
 {
     if (this->_isRunning)
         return;
 
-    xTaskCreatePinnedToCore(taskDoExecute, "taskDoExecute", configMINIMAL_STACK_SIZE + 2048, this, 1, nullptr, portNUM_PROCESSORS - 1);
+    xTaskCreatePinnedToCore([](void *param)
+                            {
+                                auto screen = static_cast<RunScreen *>(param);
+                                screen->execute();
+                                vTaskDelete(nullptr); },
+                            "TVBGoneApp_RunScreen", configMINIMAL_STACK_SIZE + 2048, this, 1, nullptr, portNUM_PROCESSORS - 1);
 }
 
 void RunScreen::render(std::shared_ptr<TFT_eSPI> tft)

@@ -69,35 +69,37 @@ using namespace Utility;
 //     }
 // }
 
-// void FileUtility::readFile(fs::FS &fs, const char *path)
-// {
-//     Serial.printf("Reading file: %s\n", path);
+String FileUtility::readFile(fs::FS &fs, const char *path)
+{
+    // Serial.printf("Reading file: %s\n", path);
 
-//     File file = fs.open(path);
-//     if (!file)
-//     {
-//         Serial.println("Failed to open file for reading");
-//         return;
-//     }
+    File file = fs.open(path);
 
-//     Serial.print("Read from file: ");
-//     while (file.available())
-//     {
-//         Serial.write(file.read());
-//     }
-//     file.close();
-// }
+    if (!file)
+    {
+        // Serial.println("Failed to open file for reading");
+        return "";
+    }
+
+    auto contents = file.readString();
+
+    file.close();
+
+    return contents;
+}
 
 void FileUtility::writeFile(fs::FS &fs, const char *path, const char *message)
 {
     Serial.printf("Writing file: %s\n", path);
 
     File file = fs.open(path, FILE_WRITE);
+
     if (!file)
     {
         Serial.println("Failed to open file for writing");
         return;
     }
+
     if (file.print(message))
     {
         Serial.println("File written");
@@ -106,6 +108,7 @@ void FileUtility::writeFile(fs::FS &fs, const char *path, const char *message)
     {
         Serial.println("Write failed");
     }
+
     file.close();
 }
 
@@ -156,9 +159,9 @@ void FileUtility::writeFile(fs::FS &fs, const char *path, const char *message)
 //     }
 // }
 
-void jpegRender(std::shared_ptr<TFT_eSPI>tft, int xpos, int ypos, int displayWidth, int displayHeight);
+void jpegRender(std::shared_ptr<TFT_eSPI> tft, int xpos, int ypos, int displayWidth, int displayHeight);
 
-void FileUtility::drawJpeg(fs::FS &fs, std::shared_ptr<TFT_eSPI>tft, const char *path, int x, int y, int displayWidth, int displayHeight)
+void FileUtility::drawJpeg(fs::FS &fs, std::shared_ptr<TFT_eSPI> tft, const char *path, int x, int y, int displayWidth, int displayHeight)
 {
     // Serial.println("===========================");
     // Serial.print("Drawing file: ");
@@ -170,13 +173,13 @@ void FileUtility::drawJpeg(fs::FS &fs, std::shared_ptr<TFT_eSPI>tft, const char 
     File jpegFile = fs.open(path, FILE_READ); // or, file handle reference for SD library
 
     // ESP32 always seems to return 1 for jpegFile so this null trap does not work
-    if (!jpegFile)
-    {
-        Serial.print("ERROR: File \"");
-        Serial.print(path);
-        Serial.println("\" not found!");
-        return;
-    }
+    // if (!jpegFile)
+    // {
+    //     Serial.print("ERROR: File \"");
+    //     Serial.print(path);
+    //     Serial.println("\" not found!");
+    //     return;
+    // }
 
     // Use one of the three following methods to initialise the decoder,
     // the filename can be a String or character array type:
@@ -193,13 +196,13 @@ void FileUtility::drawJpeg(fs::FS &fs, std::shared_ptr<TFT_eSPI>tft, const char 
         // render the image onto the screen at given coordinates
         jpegRender(tft, x, y, displayWidth, displayHeight);
     }
-    else
-    {
-        Serial.println("Jpeg file format not supported!");
-    }
+    // else
+    // {
+    //     Serial.println("Jpeg file format not supported!");
+    // }
 }
 
-void jpegRender(std::shared_ptr<TFT_eSPI>tft, int xpos, int ypos, int displayWidth, int displayHeight)
+void jpegRender(std::shared_ptr<TFT_eSPI> tft, int xpos, int ypos, int displayWidth, int displayHeight)
 {
     // retrieve infomration about the image
     uint16_t *pImg;

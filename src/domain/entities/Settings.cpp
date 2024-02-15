@@ -24,7 +24,7 @@ void Settings::deserialize(String jsonString)
     auto error = deserializeJson(doc, jsonString);
 
     this->_deviceName = doc["deviceName"].as<String>();
-    this->_language = static_cast<Language>(doc["deviceName"].as<int>());
+    this->_language = static_cast<Language>(doc["language"].as<int>());
 }
 
 Settings::Settings(String jsonString)
@@ -34,9 +34,14 @@ Settings::Settings(String jsonString)
 
 Settings *Settings::fromFile(fs::FS &fs, const char *fileName)
 {
-    auto file = fs.open(fileName, FILE_WRITE);
+    auto file = fs.open(fileName, FILE_READ);
+
+    if (!file)
+        return new Settings();
 
     String jsonString = file.readString();
+
+    // Serial.println("Settings: " + jsonString);
 
     file.close();
 
@@ -55,7 +60,17 @@ String Settings::getDeviceName()
     return this->_deviceName;
 }
 
+void Settings::setDeviceName(String deviceName)
+{
+    this->_deviceName = deviceName;
+}
+
 Language Settings::getLanguage()
 {
     return this->_language;
+}
+
+void Settings::setLanguage(Language language)
+{
+    this->_language = language;
 }
