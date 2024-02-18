@@ -23,6 +23,8 @@ DeviceBase::DeviceBase(Interfaces interfaces)
     if (this->_interfaces.sdCardInterface == nullptr)
         this->_interfaces.sdCardInterface = std::make_shared<SdCardInterfaceBase>();
 
+    esp_chip_info(&this->_chip_info);
+
     DeviceBase::_initialized = true;
     DeviceBase::_instance = this;
 }
@@ -36,6 +38,10 @@ void DeviceBase::begin()
 {
     Serial.begin(115200);
 
+    if (!SPIFFS_STORAGE.begin(true))
+        Serial.println("Failed to mount SPIFFS_STORAGE");
+
+    this->_settings = Settings::fromFile(SPIFFS_STORAGE, SETTINGS_FILE_NAME);
 
     if (this->_interfaces.displayInterface != nullptr)
         this->_interfaces.displayInterface->begin();
@@ -142,7 +148,26 @@ bool DeviceBase::hasInterface(InterfaceType type)
     }
 }
 
-Interfaces Domain::Entities::DeviceBase::getInterfaces()
+Interfaces DeviceBase::getInterfaces()
 {
     return this->_interfaces;
+}
+
+esp_chip_info_t DeviceBase::getChipInfo()
+{
+    return this->_chip_info;
+}
+
+Settings *DeviceBase::getSettings()
+{
+    return this->_settings;
+}
+
+void DeviceBase::saveSettings()
+{
+    this->_settings->save(SPIFFS_STORAGE, SETTINGS_FILE_NAME);
+
+    // TODO show reboot screen
+
+    ESP.restart();
 }

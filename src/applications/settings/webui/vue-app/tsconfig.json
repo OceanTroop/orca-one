@@ -1,0 +1,19 @@
+{
+  "files": [],
+  "references": [
+    {
+      "path": "./tsconfig.node.json"
+    },
+    {
+      "path": "./tsconfig.app.json"
+    }
+  ],
+  "vueCompilerOptions": {
+    "target": "auto",
+    "experimentalUseElementAccessInTemplate": true,
+  },
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    "allowImportingTsExtensions": true
+  }
+}

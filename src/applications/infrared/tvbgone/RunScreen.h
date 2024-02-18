@@ -23,6 +23,7 @@ extern "C"
             TVBGoneRegion _region;
             TVBGoneType _type;
             ProgressBar _progressBar;
+            void execute();
 
         public:
             RunScreen(TVBGoneRegion region, TVBGoneType type, std::shared_ptr<TFT_eSPI> tft) : Screen(tft)
@@ -39,8 +40,6 @@ extern "C"
 
             void stop();
             void start();
-
-            void __execute__();
         };
     }
 

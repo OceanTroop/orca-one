@@ -1,6 +1,7 @@
 #include "AboutScreen.h"
 #include "../../services/gui/ScreenManager.h"
 #include "../../../domain/entities/DeviceBase.h"
+#include "../../Translate.h"
 
 using namespace Applications::Settings::About;
 using namespace Applications::Services::GUI;
@@ -22,12 +23,13 @@ void AboutScreen::render(std::shared_ptr<TFT_eSPI> tft)
 
     tft->setTextSize(displayInterface->getTextSizeTiny());
     tft->println("");
-    tft->println(" Device: " + deviceName);
-    tft->println(" Version: " + String(BUILD_NUMBER));
+    tft->println(" " + TRANSLATE("Device") + ": " + deviceName);
+    tft->println(" " + TRANSLATE("Version") + ": " + String(BUILD_NUMBER));
     tft->println("");
-    tft->println(" Contributors:");
+    tft->println(" " + TRANSLATE("Contributors") + ":");
     tft->println("   @cyberjulio");
     tft->println("   @marivaaldo");
+    tft->println("   @n0xa");
     tft->println("");
     tft->println(" Join https://bit.ly/hackingtroop");
 }

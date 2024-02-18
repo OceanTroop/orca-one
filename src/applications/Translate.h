@@ -2,9 +2,12 @@
 
 #include <WString.h>
 #include <map>
+#include <FS.h>
 
 #include "../domain/entities/Language.h"
 using namespace Domain::Entities;
+
+#define TRANSLATE(key) Applications::Translate::getInstance()->get(key)
 
 #ifdef __cplusplus
 extern "C"
@@ -14,28 +17,21 @@ extern "C"
     {
         class Translate
         {
-        protected:
+        private:
             std::map<String, String> _texts;
+            Language _language;
+            void deserialize(String jsonString);
+            static Translate *_instance;
+            static bool _initialized;
 
         public:
-            virtual Language getLanguage() = 0;
+            Translate(Language language, String jsonString);
 
-            String t(String key)
-            {
-                return translate(key);
-            }
+            static Translate *getInstance();
 
-            String translate(String key)
-            {
-                auto pair = _texts.find(key);
-
-                if (pair != _texts.end())
-                {
-                    return pair->second;
-                }
-
-                return "";
-            }
+            static Translate *fromFile(Language language, fs::FS &fs, const char *fileName);
+            Language getLanguage();
+            String get(String key);
         };
     }
 #ifdef __cplusplus

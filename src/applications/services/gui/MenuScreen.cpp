@@ -1,5 +1,6 @@
 #include "MenuScreen.h"
 #include "ComingSoonScreen.h"
+#include "../../Translate.h"
 
 using namespace Applications::Services::GUI;
 
@@ -16,15 +17,17 @@ MenuItem MenuScreen::newBackItem()
         ScreenManager::setCurrentScreen(currentScreen);
     };
 
-    auto item = MenuItem("backMenuItem", "Back");
+    auto item = MenuItem("backMenuItem", TRANSLATE("Back"));
 
     item.setOnClick(action);
 
     return item;
 }
 
-MenuScreen::MenuScreen(std::shared_ptr<TFT_eSPI> tft) : Screen(tft)
+MenuScreen::MenuScreen(std::shared_ptr<TFT_eSPI> tft, bool hasParent) : Screen(tft)
 {
+    if (hasParent)
+        this->addItem(this->newBackItem());
 }
 
 MenuScreen::~MenuScreen()
@@ -161,7 +164,6 @@ void MenuScreen::buttonSelectPressed()
     {
         auto subMenuScreen = new MenuScreen(this->_tft);
 
-        subMenuScreen->addItem(this->newBackItem());
         subMenuScreen->addItems(subItems);
 
         ScreenManager::setCurrentScreen(subMenuScreen);

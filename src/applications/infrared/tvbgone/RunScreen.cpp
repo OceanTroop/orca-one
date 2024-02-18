@@ -14,7 +14,7 @@ void RunScreen::stop()
     }
 }
 
-void RunScreen::__execute__()
+void RunScreen::execute()
 {
     this->_isRunning = true;
     this->_stopping = false;
@@ -83,20 +83,17 @@ void RunScreen::__execute__()
     this->_stopping = false;
 }
 
-void taskDoExecute(void *screenPointer)
-{
-    auto screen = (RunScreen *)screenPointer;
-    screen->__execute__();
-
-    vTaskDelete(nullptr);
-}
-
 void RunScreen::start()
 {
     if (this->_isRunning)
         return;
 
-    xTaskCreatePinnedToCore(taskDoExecute, "taskDoExecute", configMINIMAL_STACK_SIZE + 2048, this, 1, nullptr, portNUM_PROCESSORS - 1);
+    xTaskCreatePinnedToCore([](void *param)
+                            {
+                                auto screen = static_cast<RunScreen *>(param);
+                                screen->execute();
+                                vTaskDelete(nullptr); },
+                            "TVBGoneApp_RunScreen", configMINIMAL_STACK_SIZE + 2048, this, 1, nullptr, portNUM_PROCESSORS - 1);
 }
 
 void RunScreen::render(std::shared_ptr<TFT_eSPI> tft)
@@ -118,14 +115,11 @@ void RunScreen::render(std::shared_ptr<TFT_eSPI> tft)
 
     tft->drawString(title, titleX, 5);
     tft->setCursor(0, displaySettings.height - 35);
-    tft->println("Press any button to stop");
+    tft->println(TRANSLATE("PressAnyButtonToStop"));
 
     int progressBarMargin = 10;
-    int progressBarHeight = 25;
-    this->setTextSizeSmall(tft);
-    this->_progressBar.setPosition(progressBarMargin, (displaySettings.height - progressBarHeight) / 2);
-    this->_progressBar.setSize(displaySettings.width - (progressBarMargin * 2), progressBarHeight);
-    this->_progressBar.setProgress(0);
+    this->_progressBar.setPosition(progressBarMargin, (displaySettings.height - this->_progressBar.getHeight()) / 2);
+    this->_progressBar.setWidth(displaySettings.width - (progressBarMargin * 2));
     this->_progressBar.render(tft);
 }
 

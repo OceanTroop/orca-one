@@ -5,7 +5,6 @@
 #include <TFT_eSPI.h>
 #include <freertos/FreeRTOS.h>
 #include <freertos/task.h>
-
 #include "../../../Consts.h"
 
 #ifdef __cplusplus

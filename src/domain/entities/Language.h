@@ -1,5 +1,8 @@
 #pragma once
 
+#include <iostream>
+#include <WString.h>
+
 #ifdef __cplusplus
 extern "C"
 {
@@ -11,6 +14,9 @@ extern "C"
             English,
             PortuguesBrazil
         };
+
+        std::ostream &operator<<(std::ostream &os, Language language);
+        String languageToString(Language language);
     }
 #ifdef __cplusplus
 }

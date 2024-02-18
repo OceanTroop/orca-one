@@ -2,6 +2,14 @@
 
 using namespace Applications::Services::GUI;
 
+ProgressBar::ProgressBar()
+{
+    auto displayInterface = DeviceBase::getInstance()->getInterfaces().displayInterface;
+    auto displaySettings = displayInterface->getSettings();
+    int progressBarMargin = 10;
+    this->_width = displaySettings.width - (progressBarMargin * 2);
+}
+
 void ProgressBar::render(std::shared_ptr<TFT_eSPI> tft)
 {
     tft->drawRect(this->_x, this->_y, this->_width, this->_height, this->_borderColor);
@@ -11,6 +19,7 @@ void ProgressBar::render(std::shared_ptr<TFT_eSPI> tft)
 
     tft->fillRect(this->_x + 1, this->_y + 1, filledWidth - 2, this->_height - 2, this->_progressColor);
 
+    this->setTextSizeSmall(tft);
     this->drawBorderedText(tft, String(this->_progress) + "%", this->_x + (this->_width / 2) - 5, this->_y + 5, 1, this->_backgroundColor, this->_progressColor);
 }
 
@@ -39,10 +48,9 @@ void ProgressBar::setInvertedTextColor(int color)
     this->_invertedTextColor = color;
 }
 
-void ProgressBar::setSize(int width, int height)
+void ProgressBar::setWidth(int width)
 {
     this->_width = width;
-    this->_height = height;
 }
 
 void ProgressBar::setPosition(int x, int y)
@@ -57,6 +65,11 @@ void ProgressBar::setProgress(int progress)
         progress = 0;
     else if (progress > 100)
         progress = 100;
-        
+
     this->_progress = progress;
+}
+
+int ProgressBar::getHeight()
+{
+    return this->_height;
 }
