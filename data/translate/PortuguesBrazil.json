@@ -9,5 +9,10 @@
     "MainMenu_Settings": "Configuracoes",
     "MainMenu_Settings_Language": "Linguagem",
     "MainMenu_Settings_Reboot": "Reiniciar",
-    "MainMenu_Settings_About": "Sobre"
+    "MainMenu_Settings_About": "Sobre",
+    "Back": "Voltar",
+    "PressAnyButtonToStop": "Pressione qualquer botao para sair",
+    "Device": "Dispositivo",
+    "Version": "Versao",
+    "Contributors": "Contribuidores"
 }

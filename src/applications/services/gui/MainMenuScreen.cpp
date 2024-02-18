@@ -10,13 +10,13 @@ using namespace Applications;
 
 MainMenuScreen::MainMenuScreen(std::shared_ptr<TFT_eSPI> tft) : MenuScreen(tft, false)
 {
-    this->addItem(newAppsMainMenuItem());
-    this->addItem(newWifiMainMenuItem());
-    this->addItem(newBluetoothMainMenuItem());
-    this->addItem(newSubGhzMainMenuItem());
-    this->addItem(newNfcMainMenuItem());
+    // this->addItem(newAppsMainMenuItem());
+    // this->addItem(newWifiMainMenuItem());
+    // this->addItem(newBluetoothMainMenuItem());
+    // this->addItem(newSubGhzMainMenuItem());
+    // this->addItem(newNfcMainMenuItem());
     this->addItem(newInfraredMainMenuItem());
-    this->addItem(newBadUsbMainMenuItem());
+    // this->addItem(newBadUsbMainMenuItem());
     this->addItem(newSettingsMainMenuItem());
 }
 
@@ -84,6 +84,7 @@ MenuItem MainMenuScreen::newSettingsMainMenuItem()
     MenuItem settingsLanguageEnglishSubMenuItem("settingsLanguageEnglishSubMenuItem", "English");
     MenuItem settingsLanguagePortuguesBrasilSubMenuItem("settingsLanguagePortuguesBrasilSubMenuItem", "Português (BR)");
 
+    // Language - English
     settingsLanguageEnglishSubMenuItem.setOnClick([]()
                                                   {
     auto currentSettings = DeviceBase::getInstance()->getSettings();
@@ -91,6 +92,10 @@ MenuItem MainMenuScreen::newSettingsMainMenuItem()
     currentSettings->setLanguage(Domain::Entities::Language::English);
 
     DeviceBase::getInstance()->saveSettings(); });
+    
+    settingsLanguageSubMenuItem.addItem(settingsLanguageEnglishSubMenuItem);
+
+    // Language - PortuguesBrazil
 
     settingsLanguagePortuguesBrasilSubMenuItem.setOnClick([]()
                                                           {
@@ -100,7 +105,6 @@ MenuItem MainMenuScreen::newSettingsMainMenuItem()
 
     DeviceBase::getInstance()->saveSettings(); });
 
-    settingsLanguageSubMenuItem.addItem(settingsLanguageEnglishSubMenuItem);
     settingsLanguageSubMenuItem.addItem(settingsLanguagePortuguesBrasilSubMenuItem);
 
     settingsMenuItem.addItem(settingsLanguageSubMenuItem);

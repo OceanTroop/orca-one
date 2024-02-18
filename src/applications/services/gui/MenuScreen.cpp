@@ -1,5 +1,6 @@
 #include "MenuScreen.h"
 #include "ComingSoonScreen.h"
+#include "../../Translate.h"
 
 using namespace Applications::Services::GUI;
 
@@ -16,7 +17,7 @@ MenuItem MenuScreen::newBackItem()
         ScreenManager::setCurrentScreen(currentScreen);
     };
 
-    auto item = MenuItem("backMenuItem", "Back");
+    auto item = MenuItem("backMenuItem", TRANSLATE("Back"));
 
     item.setOnClick(action);
 

@@ -115,7 +115,7 @@ void RunScreen::render(std::shared_ptr<TFT_eSPI> tft)
 
     tft->drawString(title, titleX, 5);
     tft->setCursor(0, displaySettings.height - 35);
-    tft->println("Press any button to stop");
+    tft->println(TRANSLATE("PressAnyButtonToStop"));
 
     int progressBarMargin = 10;
     this->_progressBar.setPosition(progressBarMargin, (displaySettings.height - this->_progressBar.getHeight()) / 2);
