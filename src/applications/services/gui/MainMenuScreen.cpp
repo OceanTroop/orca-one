@@ -4,6 +4,7 @@
 #include "../../settings/webui/WebUIApp.h"
 #include "../../infrared/tvbgone/TVBGoneApp.h"
 #include "../../Translate.h"
+#include "../../../domain/entities/Color.h"
 
 using namespace Applications::Services::GUI;
 using namespace Applications;
@@ -69,6 +70,27 @@ MenuItem MainMenuScreen::newBadUsbMainMenuItem()
     return badUsbMenuItem;
 }
 
+MenuItem MainMenuScreen::newSettingsColorSubMenuItem()
+{
+    MenuItem settingsColorSubMenuItem("settingsColorSubMenuItem", TRANSLATE("MainMenu_Settings_Color"));
+    auto currentSettings = DeviceBase::getInstance()->getSettings();
+    Color currColor = currentSettings->getPrimaryColor();
+    for (int currColorIdx = Green; currColorIdx <= Orange; currColorIdx++)
+    {
+        Color color = static_cast<Color>(currColorIdx);
+        String colorName = colorToString(color);
+        MenuItem colorSubmenu("Color_" + colorName, colorName);
+        colorSubmenu.setOnClick([=]()
+        {
+            auto currentSettings = DeviceBase::getInstance()->getSettings();
+            currentSettings->setPrimaryColor(color);
+            DeviceBase::getInstance()->saveSettings();
+        });
+        settingsColorSubMenuItem.addItem(colorSubmenu);
+    }
+    return settingsColorSubMenuItem;
+}
+
 MenuItem MainMenuScreen::newSettingsMainMenuItem()
 {
     MenuItem settingsMenuItem("settingsMenuItem", TRANSLATE("MainMenu_Settings"));
@@ -78,6 +100,9 @@ MenuItem MainMenuScreen::newSettingsMainMenuItem()
     settingsWebUISubMenuItem.setOnClick([]()
                                         { AppUtils::runApplication<Applications::Settings::WebUI::WebUIApp>(); });
     settingsMenuItem.addItem(settingsWebUISubMenuItem);
+
+    // Color
+    settingsMenuItem.addItem(MainMenuScreen::newSettingsColorSubMenuItem());
 
     // Language
     MenuItem settingsLanguageSubMenuItem("settingsLanguageSubMenuItem", TRANSLATE("MainMenu_Settings_Language"));
@@ -92,7 +117,7 @@ MenuItem MainMenuScreen::newSettingsMainMenuItem()
     currentSettings->setLanguage(Domain::Entities::Language::English);
 
     DeviceBase::getInstance()->saveSettings(); });
-    
+
     settingsLanguageSubMenuItem.addItem(settingsLanguageEnglishSubMenuItem);
 
     // Language - PortuguesBrazil

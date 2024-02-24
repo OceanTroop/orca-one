@@ -21,6 +21,7 @@ extern "C"
             MenuItem newInfraredMainMenuItem();
             MenuItem newBadUsbMainMenuItem();
             MenuItem newSettingsMainMenuItem();
+            MenuItem newSettingsColorSubMenuItem();
 
         public:
             MainMenuScreen(std::shared_ptr<TFT_eSPI> tft);
