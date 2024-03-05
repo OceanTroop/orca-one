@@ -2,23 +2,18 @@
 
 #include <TFT_eSPI.h>
 #include <sstream>
+#include <tuple>
 
-String Domain::Entities::colorToString(Color color)
+String Domain::Entities::colorSchemeToString(ColorScheme scheme)
 {
     std::stringstream ss;
-    switch (color)
+    switch (scheme)
     {
-        case Color::Black:
-            ss << "Black";
+        case ColorScheme::Default:
+            ss << "Default";
             break;
-        case Color::White:
-            ss << "White";
-            break;
-        case Color::Orange:
-            ss << "Orange";
-            break;
-        case Color::Green:
-            ss << "Green";
+        case ColorScheme::FlipperZero:
+            ss << "Flipper Zero";
             break;
         default:
             ss << "Color not found!";
@@ -39,5 +34,22 @@ uint16_t Domain::Entities::colorToUInt16(Color color)
             return TFT_ORANGE;
         case Color::Green:
             return TFT_GREEN;
+        case Color::Yellow:
+            return TFT_YELLOW;
+        case Color::Marron:
+            return TFT_MAROON;
+    }
+}
+
+Domain::Entities::ColorSchemeData Domain::Entities::colorSchemeToData(ColorScheme scheme)
+{
+    switch (scheme)
+    {
+        case ColorScheme::Default:
+            return ColorSchemeData(Color::Green, Color::Black);
+        case ColorScheme::FlipperZero:
+            return ColorSchemeData(Color::Marron, Color::Orange);
+        default:
+            return ColorSchemeData(Color::Green, Color::Black);
     }
 }

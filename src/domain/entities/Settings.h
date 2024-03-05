@@ -24,6 +24,7 @@ extern "C"
             String _deviceName;
             Language _language;
             Color _primaryColor;
+            Color _backgroundColor;
             void deserialize(String jsonString);
 
         public:
@@ -39,6 +40,8 @@ extern "C"
             void setLanguage(Language language);
             Color getPrimaryColor();
             void setPrimaryColor(Color color);
+            Color getBackgroundColor();
+            void setBackgroundColor(Color color);
 
             String serialize();
         };

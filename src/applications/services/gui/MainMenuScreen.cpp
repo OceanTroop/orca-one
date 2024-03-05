@@ -74,20 +74,24 @@ MenuItem MainMenuScreen::newSettingsColorSubMenuItem()
 {
     MenuItem settingsColorSubMenuItem("settingsColorSubMenuItem", TRANSLATE("MainMenu_Settings_Color"));
     auto currentSettings = DeviceBase::getInstance()->getSettings();
-    Color currColor = currentSettings->getPrimaryColor();
-    for (int currColorIdx = Green; currColorIdx <= Orange; currColorIdx++)
+
+    for (int currColorIdx = Default; currColorIdx <= FlipperZero; currColorIdx++)
     {
-        Color color = static_cast<Color>(currColorIdx);
-        String colorName = colorToString(color);
-        MenuItem colorSubmenu("Color_" + colorName, colorName);
+        ColorScheme scheme = static_cast<ColorScheme>(currColorIdx);
+        String schemeName = colorSchemeToString(scheme);
+        MenuItem colorSubmenu("Color_" + schemeName, schemeName);
         colorSubmenu.setOnClick([=]()
         {
+
+            auto colorSchemeData = colorSchemeToData(scheme);
             auto currentSettings = DeviceBase::getInstance()->getSettings();
-            currentSettings->setPrimaryColor(color);
+            currentSettings->setPrimaryColor(colorSchemeData.primaryColor);
+            currentSettings->setBackgroundColor(colorSchemeData.backgroundColor);
             DeviceBase::getInstance()->saveSettings();
         });
         settingsColorSubMenuItem.addItem(colorSubmenu);
     }
+
     return settingsColorSubMenuItem;
 }
 
