@@ -6,10 +6,13 @@ using namespace Domain::Entities;
 
 void Scrollbar::render(std::shared_ptr<TFT_eSPI> tft)
 {
+    auto device = DeviceBase::getInstance();
     auto displayInterface = DeviceBase::getInstance()->getInterfaces().displayInterface;
     auto displaySettings = displayInterface->getSettings();
+    auto primaryColor = colorToUInt16(device->getSettings()->getPrimaryColor());
+    auto backgroundColor = colorToUInt16(device->getSettings()->getBackgroundColor());
 
-    tft->fillRect(displaySettings.width - 9, 0, 2, displaySettings.height, DEFAULT_PRIMARY_COLOR);
+    tft->fillRect(displaySettings.width - 9, 0, 2, displaySettings.height, primaryColor);
 
     int scrollBarHeight = displaySettings.height / this->_totalItems;
     int scrollBarY = this->_currentItem * scrollBarHeight;
@@ -17,7 +20,7 @@ void Scrollbar::render(std::shared_ptr<TFT_eSPI> tft)
     if (this->_currentItem + 1 == this->_totalItems)
         scrollBarY = displaySettings.height - scrollBarHeight;
 
-    tft->fillRect(displaySettings.width - 11, scrollBarY, 6, scrollBarHeight, DEFAULT_PRIMARY_COLOR);
+    tft->fillRect(displaySettings.width - 11, scrollBarY, 6, scrollBarHeight, primaryColor);
 }
 
 void Scrollbar::setCurrentItem(int currentItem)

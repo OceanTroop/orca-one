@@ -1,10 +1,14 @@
 #include "ComingSoonScreen.h"
+#include "../../../domain/entities/DeviceBase.h"
 
+using namespace Domain::Entities;
 using namespace Applications::Services::GUI;
 
 void ComingSoonScreen::render(std::shared_ptr<TFT_eSPI> tft)
 {
-    tft->setTextColor(DEFAULT_PRIMARY_COLOR);
+    auto device = DeviceBase::getInstance();
+    auto primaryColor = colorToUInt16(device->getSettings()->getPrimaryColor());
+    tft->setTextColor(primaryColor);
     tft->setTextDatum(TL_DATUM);
     this->setTextSizeSmall(this->_tft);
     tft->setCursor(0, 0);
