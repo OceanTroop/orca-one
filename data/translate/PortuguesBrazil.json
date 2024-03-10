@@ -13,7 +13,10 @@
     "MainMenu_Settings_About": "Sobre",
     "Back": "Voltar",
     "PressAnyButtonToStop": "Pressione qualquer botao para sair",
+    "PressSelectToExit": "Pressione selecionar para sair",
     "Device": "Dispositivo",
     "Version": "Versao",
-    "Contributors": "Contribuidores"
+    "Contributors": "Contribuidores",
+    "Password": "Senha",
+    "Starting": "Iniciando"
 }
