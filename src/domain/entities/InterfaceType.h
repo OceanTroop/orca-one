@@ -17,7 +17,8 @@ extern "C"
             Gps,
             Keyboard,
             Buttons,
-            Infrared
+            Infrared,
+            Microphone
         };
     }
 #ifdef __cplusplus
