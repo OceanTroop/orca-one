@@ -24,10 +24,10 @@ namespace Domain::Entities
         std::shared_ptr<KeyboardInterfaceBase> keyboard;
         std::shared_ptr<InfraredInterfaceBase> infrared;
         std::shared_ptr<LedInterfaceBase> led;
+        std::shared_ptr<MicrophoneInterfaceBase> microphone;
         std::shared_ptr<WifiInterfaceBase> wifi;
         std::shared_ptr<BluetoothInterfaceBase> bluetooth;
         std::shared_ptr<SdCardInterfaceBase> sdCard;
         std::shared_ptr<GpsInterfaceBase> gps;
-        std::shared_ptr<MicrophoneInterfaceBase> microphone;
     };
 }
