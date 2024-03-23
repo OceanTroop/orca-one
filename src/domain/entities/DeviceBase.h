@@ -29,6 +29,7 @@ namespace Domain::Entities
 
         Settings *getSettings();
         void saveSettings();
+        void saveSettingsAndReboot();
 
     private:
         static DeviceBase *_instance;

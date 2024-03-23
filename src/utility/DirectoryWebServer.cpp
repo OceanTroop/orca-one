@@ -45,6 +45,12 @@ DirectoryWebServer::DirectoryWebServer(fs::FS &fs, const char *basePath, int por
 {
 }
 
+void DirectoryWebServer::setWiFi(const char *ssid, const char *password)
+{
+    this->_ssid = ssid;
+    this->_password = password;
+}
+
 void DirectoryWebServer::begin()
 {
     if (this->_isRunning || this->_isStopping)

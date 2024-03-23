@@ -9,6 +9,8 @@ String Settings::serialize()
     JsonDocument doc;
 
     doc["deviceName"] = this->_deviceName;
+    doc["wifiSSID"] = this->_wifiSSID;
+    doc["wifiPassword"] = this->_wifiPassword;
     doc["language"] = static_cast<int>(this->_language);
 
     String jsonString;
@@ -24,6 +26,8 @@ void Settings::deserialize(String jsonString)
     auto error = deserializeJson(doc, jsonString);
 
     this->_deviceName = doc["deviceName"].as<String>();
+    this->_wifiSSID = doc["wifiSSID"].as<String>();
+    this->_wifiPassword = doc["wifiPassword"].as<String>();
     this->_language = static_cast<Language>(doc["language"].as<int>());
 }
 
@@ -63,6 +67,26 @@ String Settings::getDeviceName()
 void Settings::setDeviceName(String deviceName)
 {
     this->_deviceName = deviceName;
+}
+
+String Settings::getWifiSSID()
+{
+    return this->_wifiSSID;
+}
+
+void Settings::setWifiSSID(String wifiSSID)
+{
+    this->_wifiSSID = wifiSSID;
+}
+
+String Settings::getWifiPassword()
+{
+    return this->_wifiPassword;
+}
+
+void Settings::setWifiPassword(String wifiPassword)
+{
+    this->_wifiPassword = wifiPassword;
 }
 
 Language Settings::getLanguage()

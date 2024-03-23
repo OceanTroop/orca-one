@@ -1,4 +1,6 @@
 {
     "deviceName": "@oceantroop",
+    "wifiSSID": "OrcaOne-AP",
+    "wifiPassword": "orcaoneap",
     "language": 0
 }

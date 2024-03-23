@@ -18,8 +18,8 @@ extern "C"
         class WebUIScreen : public Screen
         {
         private:
-            String _ssid = "OrcaOne-AP";
-            String _ssidPassword = "orcaoneap";
+            String _ssid;
+            String _ssidPassword;
             DirectoryWebServer *_webServer;
             void handleSettingsGet();
             void handleSettingsPost();
