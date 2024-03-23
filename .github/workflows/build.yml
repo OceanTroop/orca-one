@@ -2,6 +2,7 @@ name: "[CI/CD] Build and Release"
 
 on:
   workflow_dispatch:
+  pull_request:
   push:
     branches:
       - main
@@ -83,7 +84,7 @@ jobs:
         run: |
           for file in $(find .pio/build/** -name 'OrcaOne*.bin'); do
             echo "Uploading $file"
-            curl \
+            curl --http1.1 \
               -X POST \
               --data-binary @"$file" \
               -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
