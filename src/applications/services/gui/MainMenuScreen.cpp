@@ -91,7 +91,7 @@ MenuItem MainMenuScreen::newSettingsMainMenuItem()
 
     currentSettings->setLanguage(Domain::Entities::Language::English);
 
-    DeviceBase::getInstance()->saveSettings(); });
+    DeviceBase::getInstance()->saveSettingsAndReboot(); });
     
     settingsLanguageSubMenuItem.addItem(settingsLanguageEnglishSubMenuItem);
 
@@ -103,7 +103,7 @@ MenuItem MainMenuScreen::newSettingsMainMenuItem()
 
     currentSettings->setLanguage(Domain::Entities::Language::PortuguesBrazil);
 
-    DeviceBase::getInstance()->saveSettings(); });
+    DeviceBase::getInstance()->saveSettingsAndReboot(); });
 
     settingsLanguageSubMenuItem.addItem(settingsLanguagePortuguesBrasilSubMenuItem);
 

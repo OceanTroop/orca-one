@@ -166,8 +166,12 @@ Settings *DeviceBase::getSettings()
 void DeviceBase::saveSettings()
 {
     this->_settings->save(SPIFFS_STORAGE, SETTINGS_FILE_NAME);
+}
+
+void DeviceBase::saveSettingsAndReboot()
+{
+    this->saveSettings();
 
     // TODO show reboot screen
-
     ESP.restart();
 }

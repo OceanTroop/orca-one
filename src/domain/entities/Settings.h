@@ -21,6 +21,8 @@ extern "C"
         {
         private:
             String _deviceName;
+            String _wifiSSID;
+            String _wifiPassword;
             Language _language;
             void deserialize(String jsonString);
 
@@ -33,6 +35,10 @@ extern "C"
 
             String getDeviceName();
             void setDeviceName(String deviceName);
+            String getWifiSSID();
+            void setWifiSSID(String wifiSSID);
+            String getWifiPassword();
+            void setWifiPassword(String wifiPassword);
             Language getLanguage();
             void setLanguage(Language language);
 

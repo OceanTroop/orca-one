@@ -22,7 +22,7 @@ export default toNative(App);
   <div class="container">
     <div class="row">
       <div class="twelve columns"></div>
-      <h3 class="title">Orca One</h3>
+      <h1 class="title">Orca One</h1>
     </div>
     <RouterView />
   </div>
