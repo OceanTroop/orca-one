@@ -4,8 +4,9 @@
 .vscode/launch.json
 .vscode/ipch
 
-
 wokwi.toml
 diagram.json
 
 # /data/applications/settings/webui/*
+
+compile_commands.json
