@@ -1,12 +1,14 @@
-name: CI/CD
+name: "[CI/CD] Build and Release"
 
 on:
   workflow_dispatch:
-  pull_request:
   push:
     branches:
       - main
-      # - feature/cicd-adjusts
+
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: false
 
 jobs:
   build_and_release:
