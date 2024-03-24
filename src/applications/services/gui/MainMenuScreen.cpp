@@ -82,7 +82,7 @@ MenuItem MainMenuScreen::newSettingsMainMenuItem()
     // Language
     MenuItem settingsLanguageSubMenuItem("settingsLanguageSubMenuItem", TRANSLATE("MainMenu_Settings_Language"));
     MenuItem settingsLanguageEnglishSubMenuItem("settingsLanguageEnglishSubMenuItem", "English");
-    MenuItem settingsLanguagePortuguesBrasilSubMenuItem("settingsLanguagePortuguesBrasilSubMenuItem", "Português (BR)");
+    MenuItem settingsLanguagePortuguesBrasilSubMenuItem("settingsLanguagePortuguesBrasilSubMenuItem", "Portugues (BR)");
 
     // Language - English
     settingsLanguageEnglishSubMenuItem.setOnClick([]()
@@ -91,7 +91,7 @@ MenuItem MainMenuScreen::newSettingsMainMenuItem()
 
     currentSettings->setLanguage(Domain::Entities::Language::English);
 
-    DeviceBase::getInstance()->saveSettings(); });
+    DeviceBase::getInstance()->saveSettingsAndReboot(); });
     
     settingsLanguageSubMenuItem.addItem(settingsLanguageEnglishSubMenuItem);
 
@@ -103,7 +103,7 @@ MenuItem MainMenuScreen::newSettingsMainMenuItem()
 
     currentSettings->setLanguage(Domain::Entities::Language::PortuguesBrazil);
 
-    DeviceBase::getInstance()->saveSettings(); });
+    DeviceBase::getInstance()->saveSettingsAndReboot(); });
 
     settingsLanguageSubMenuItem.addItem(settingsLanguagePortuguesBrasilSubMenuItem);
 

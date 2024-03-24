@@ -9,6 +9,16 @@ using namespace Utility;
 
 void WebUIScreen::startServer()
 {
+    auto settings = DeviceBase::getInstance()->getSettings();
+    this->_ssid = settings->getWifiSSID();
+    this->_ssidPassword = settings->getWifiPassword();
+
+    if (!this->_ssid || this->_ssid.isEmpty())
+        this->_ssid = "OrcaOne-AP";
+
+    if (!this->_ssidPassword || this->_ssidPassword.isEmpty())
+        this->_ssidPassword = "orcaoneap";
+
     this->_webServer = new DirectoryWebServer(SPIFFS_STORAGE, BASE_PATH);
     this->_webServer->setWiFi(this->_ssid.c_str(), this->_ssidPassword.c_str());
     this->_webServer->on("/settings", HTTP_GET, std::bind(&WebUIScreen::handleSettingsGet, this));
@@ -67,18 +77,19 @@ void WebUIScreen::handleSettingsGet()
 void WebUIScreen::handleSettingsPost()
 {
     if (!this->_webServer->hasArg("plain"))
-    {
         return;
-    }
 
     auto jsonString = this->_webServer->arg("plain");
-    
+
     Domain::Entities::Settings newSettings(jsonString);
     auto currentSettings = DeviceBase::getInstance()->getSettings();
 
     currentSettings->setDeviceName(newSettings.getDeviceName());
+    currentSettings->setWifiSSID(newSettings.getWifiSSID());
+    currentSettings->setWifiPassword(newSettings.getWifiPassword());
 
     DeviceBase::getInstance()->saveSettings();
-
     this->_webServer->send(200, "text/plain", "Settings saved!");
+
+    ESP.restart();
 }

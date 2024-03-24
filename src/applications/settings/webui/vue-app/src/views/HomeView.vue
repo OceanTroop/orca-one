@@ -1,11 +1,24 @@
 <template>
   <div class="row">
+    <h4 class="title">General</h4>
     <div class="twelve columns">
-      <label>Device Name</label>
-      <input class="u-full-width" v-model="settings.deviceName" />
+      <label for="deviceName">Device Name</label>
+      <input id="deviceName" class="u-full-width" type="text" v-model="settings.deviceName" minlength="1" />
     </div>
-    <button class="button-primary" @click="save">Save</button>
-    <div>{{ message }}</div>
+  </div>
+
+  <div class="row">
+    <h4 class="title">Wi-Fi Settings</h4>
+    <div class="twelve columns">
+      <label for="wifiSSID">SSID (Wi-Fi Name)</label>
+      <input id="wifiSSID" class="u-full-width" type="text" v-model="settings.wifiSSID" minlength="1" />
+    </div>
+    <div class="twelve columns">
+      <label for="wifiPassword">Password</label>
+      <input id="wifiPassword" class="u-full-width" type="password" v-model="settings.wifiPassword" minlength="8" />
+    </div>
+    <button class="button-primary" @click="validateAndSave">Save</button>
+    <div v-html="message"></div>
   </div>
 </template>
 
@@ -30,11 +43,28 @@ class HomeView extends Vue {
       });
   }
 
+  validateAndSave(): void {
+    console.log(this.settings);
+    if (!this.settings.deviceName || !this.settings.wifiSSID || this.settings.wifiPassword.length < 8) {
+      if (!this.settings.deviceName) {
+        this.message = "Device Name cannot be empty.";
+      } else if (!this.settings.wifiSSID) {
+        this.message = "Wi-Fi SSID cannot be empty.";
+      } else if (!this.settings.wifiPassword.length) {
+        this.message = "Wi-Fi Password cannot be empty.";
+      } else if (this.settings.wifiPassword.length < 8) {
+        this.message = "Wi-Fi Password must be at least 8 characters long.";
+      }
+      return;
+    }
+    this.save();
+  }
+
   async save(): Promise<void> {
     axios.post("/settings", this.settings).then(() => {
       this.message = "Settings saved! Please reboot device!";
-    }).catch(() => {
-      this.message = "ERROR while save settings!";
+    }).catch((e) => {
+      this.message = `<strong>ERROR while save settings:</strong> ${e.message}`;
     });
   }
 }

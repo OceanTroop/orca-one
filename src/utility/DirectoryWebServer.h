@@ -24,11 +24,7 @@ namespace Utility
         DirectoryWebServer(fs::FS &fs, const char *path, int port = 80);
         ~DirectoryWebServer() { this->stop(); }
 
-        void setWiFi(const char *ssid, const char *password)
-        {
-            this->_ssid = ssid;
-            this->_password = password;
-        }
+        void setWiFi(const char *ssid, const char *password);
 
         virtual void begin();
         virtual void stop();

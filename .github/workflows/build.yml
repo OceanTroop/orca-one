@@ -1,4 +1,4 @@
-name: CI/CD
+name: "[CI/CD] Build and Release"
 
 on:
   workflow_dispatch:
@@ -6,7 +6,10 @@ on:
   push:
     branches:
       - main
-      # - feature/cicd-adjusts
+
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: false
 
 jobs:
   build_and_release:
@@ -15,10 +18,10 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v5
         with:
           python-version: "3.x"
 
@@ -58,7 +61,7 @@ jobs:
 
       - name: Upload Binaries
         id: upload_binaries
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           path: .pio/build/**/OrcaOne*.bin
         if: github.event_name != 'pull_request'
@@ -67,7 +70,7 @@ jobs:
         id: create_release
         uses: actions/create-release@v1
         env:
-          GITHUB_TOKEN: ${{ secrets.RELEASES_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: v0.0.${{ github.run_number }}
           release_name: v0.0.${{ github.run_number }}
@@ -81,10 +84,10 @@ jobs:
         run: |
           for file in $(find .pio/build/** -name 'OrcaOne*.bin'); do
             echo "Uploading $file"
-            curl \
+            curl --http1.1 \
               -X POST \
               --data-binary @"$file" \
-              -H "Authorization: Bearer ${{ secrets.RELEASES_TOKEN }}" \
+              -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
               -H "Content-Type: application/octet-stream" \
               "${{ steps.create_release.outputs.upload_url }}=$(basename $file)"
           done
