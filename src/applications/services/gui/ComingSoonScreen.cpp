@@ -7,8 +7,6 @@ using namespace Applications::Services::GUI;
 void ComingSoonScreen::render(std::shared_ptr<TFT_eSPI> tft)
 {
     auto device = DeviceBase::getInstance();
-    auto primaryColor = colorToUInt16(device->getSettings()->getPrimaryColor());
-    tft->setTextColor(primaryColor);
     tft->setTextDatum(TL_DATUM);
     this->setTextSizeSmall(this->_tft);
     tft->setCursor(0, 0);

@@ -15,6 +15,9 @@ String Domain::Entities::colorSchemeToString(ColorScheme scheme)
         case ColorScheme::FlipperZero:
             ss << "Flipper Zero";
             break;
+        case ColorScheme::Bruce:
+            ss << "Bruce";
+            break;
         default:
             ss << "Color not found!";
             break;
@@ -38,6 +41,8 @@ uint16_t Domain::Entities::colorToUInt16(Color color)
             return TFT_YELLOW;
         case Color::Marron:
             return TFT_MAROON;
+        case Color::Purple:
+            return TFT_PURPLE;
     }
 }
 
@@ -49,6 +54,8 @@ Domain::Entities::ColorSchemeData Domain::Entities::colorSchemeToData(ColorSchem
             return ColorSchemeData(Color::Green, Color::Black);
         case ColorScheme::FlipperZero:
             return ColorSchemeData(Color::Marron, Color::Orange);
+        case ColorScheme::Bruce:
+            return ColorSchemeData(Color::Purple, Color::Black);
         default:
             return ColorSchemeData(Color::Green, Color::Black);
     }

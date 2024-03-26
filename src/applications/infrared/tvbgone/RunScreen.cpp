@@ -101,11 +101,8 @@ void RunScreen::render(std::shared_ptr<TFT_eSPI> tft)
     auto device = DeviceBase::getInstance();
     auto displayInterface = DeviceBase::getInstance()->getInterfaces().displayInterface;
     auto displaySettings = displayInterface->getSettings();
-    auto primaryColor = colorToUInt16(device->getSettings()->getPrimaryColor());
-    auto backgroundColor = colorToUInt16(device->getSettings()->getBackgroundColor());
 
     this->setTextSizeSmall(tft);
-    tft->setTextColor(primaryColor);
 
     String title = this->_region == TVBGoneRegion::AmericasAsia
                        ? "Americas / Asia"
@@ -122,10 +119,6 @@ void RunScreen::render(std::shared_ptr<TFT_eSPI> tft)
 
     int progressBarMargin = 10;
     this->_progressBar.setPosition(progressBarMargin, (displaySettings.height - this->_progressBar.getHeight()) / 2);
-    this->_progressBar.setBorderColor(primaryColor);
-    this->_progressBar.setBackgroundColor(backgroundColor);
-    this->_progressBar.setProgressColor(primaryColor);
-    this->_progressBar.setTextColor(primaryColor);
     this->_progressBar.setWidth(displaySettings.width - (progressBarMargin * 2));
     this->_progressBar.render(tft);
 }

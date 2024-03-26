@@ -12,9 +12,6 @@ void AboutScreen::render(std::shared_ptr<TFT_eSPI> tft)
     auto device = DeviceBase::getInstance();
     auto displayInterface = device->getInterfaces().displayInterface;
     auto deviceName = device->getName();
-    auto primaryColor = colorToUInt16(device->getSettings()->getPrimaryColor());
-
-    tft->setTextColor(primaryColor);
     tft->setTextDatum(TL_DATUM);
 
     tft->setCursor(5, 0);

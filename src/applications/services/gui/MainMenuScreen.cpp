@@ -75,7 +75,7 @@ MenuItem MainMenuScreen::newSettingsColorSubMenuItem()
     MenuItem settingsColorSubMenuItem("settingsColorSubMenuItem", TRANSLATE("MainMenu_Settings_Color"));
     auto currentSettings = DeviceBase::getInstance()->getSettings();
 
-    for (int currColorIdx = Default; currColorIdx <= FlipperZero; currColorIdx++)
+    for (int currColorIdx = Default; currColorIdx <= LATEST_COLOR_SCHEME_INDEX; currColorIdx++)
     {
         ColorScheme scheme = static_cast<ColorScheme>(currColorIdx);
         String schemeName = colorSchemeToString(scheme);

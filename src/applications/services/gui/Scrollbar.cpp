@@ -10,7 +10,6 @@ void Scrollbar::render(std::shared_ptr<TFT_eSPI> tft)
     auto displayInterface = DeviceBase::getInstance()->getInterfaces().displayInterface;
     auto displaySettings = displayInterface->getSettings();
     auto primaryColor = colorToUInt16(device->getSettings()->getPrimaryColor());
-    auto backgroundColor = colorToUInt16(device->getSettings()->getBackgroundColor());
 
     tft->fillRect(displaySettings.width - 9, 0, 2, displaySettings.height, primaryColor);
 

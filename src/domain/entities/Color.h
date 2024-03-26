@@ -12,7 +12,8 @@ extern "C"
         enum ColorScheme
         {
             Default,
-            FlipperZero
+            FlipperZero,
+            Bruce
         };
         enum Color
         {
@@ -21,7 +22,8 @@ extern "C"
             White,
             Orange,
             Yellow,
-            Marron
+            Marron,
+            Purple
         };
         struct ColorSchemeData
         {

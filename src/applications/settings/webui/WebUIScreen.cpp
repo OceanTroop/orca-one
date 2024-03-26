@@ -34,13 +34,10 @@ void WebUIScreen::render(std::shared_ptr<TFT_eSPI> tft)
     auto device = DeviceBase::getInstance();
     auto displayInterface = DeviceBase::getInstance()->getInterfaces().displayInterface;
     auto displaySettings = displayInterface->getSettings();
-    auto primaryColor = colorToUInt16(device->getSettings()->getPrimaryColor());
 
     this->startServer();
 
     IPAddress ipAddress = WiFi.softAPIP();
-
-    tft->setTextColor(primaryColor);
 
     this->setTextSizeMedium(tft);
     auto title = String("Web UI");
