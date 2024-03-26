@@ -32,8 +32,8 @@ void Launcher::begin()
     auto device = DeviceBase::getInstance();
     auto settings = device->getSettings();
     auto language = settings->getLanguage();
-    auto primaryColor = device->getSettings()->getPrimaryColor();
-    auto backgroundColor = device->getSettings()->getBackgroundColor();
+    auto primaryColor = settings->getPrimaryColor();
+    auto backgroundColor = settings->getBackgroundColor();
 
     tft->fillScreen(colorToUInt16(backgroundColor));
     tft->setTextColor(colorToUInt16(primaryColor));

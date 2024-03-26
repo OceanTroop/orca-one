@@ -5,8 +5,9 @@ using namespace Applications::Services::GUI;
 ProgressBar::ProgressBar()
 {
     auto displayInterface = DeviceBase::getInstance()->getInterfaces().displayInterface;
+    auto displaySettings = displayInterface->getSettings();
     int progressBarMargin = 10;
-    this->_width = displayInterface->getSettings().width - (progressBarMargin * 2);
+    this->_width = displaySettings.width - (progressBarMargin * 2);
 }
 
 void ProgressBar::render(std::shared_ptr<TFT_eSPI> tft)
