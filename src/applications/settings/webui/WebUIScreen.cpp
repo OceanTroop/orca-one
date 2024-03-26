@@ -31,7 +31,6 @@ WebUIScreen::WebUIScreen(std::shared_ptr<TFT_eSPI> tft) : Screen(tft)
 
 void WebUIScreen::render(std::shared_ptr<TFT_eSPI> tft)
 {
-    auto device = DeviceBase::getInstance();
     auto displayInterface = DeviceBase::getInstance()->getInterfaces().displayInterface;
     auto displaySettings = displayInterface->getSettings();
 
