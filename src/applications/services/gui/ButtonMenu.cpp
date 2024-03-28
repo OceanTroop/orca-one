@@ -8,20 +8,23 @@ using namespace Domain::Entities;
 
 void ButtonMenu::render(std::shared_ptr<TFT_eSPI> tft)
 {
+    auto device = DeviceBase::getInstance();
     auto displayInterface = DeviceBase::getInstance()->getInterfaces().displayInterface;
     auto displaySettings = displayInterface->getSettings();
+    auto primaryColor = colorToUInt16(device->getSettings()->getPrimaryColor());
+    auto backgroundColor = colorToUInt16(device->getSettings()->getBackgroundColor());
 
     // Draw button border
-    tft->drawRoundRect(this->_x, this->_y, displaySettings.width - 20, 25, 8, this->_borderColor);
+    tft->drawRoundRect(this->_x, this->_y, displaySettings.width - 20, 25, 8, primaryColor);
 
     // Draw button fill
     if (this->isSelected())
-        tft->fillRoundRect(this->_x, this->_y, displaySettings.width - 20, 25, 8, this->_backgroundColor);
+        tft->fillRoundRect(this->_x, this->_y, displaySettings.width - 20, 25, 8, primaryColor);
 
     if (this->isSelected())
-        tft->setTextColor(this->_selectedTextColor);
+        tft->setTextColor(backgroundColor);
     else
-        tft->setTextColor(this->_textColor);
+        tft->setTextColor(primaryColor);
 
     this->setTextSizeSmall(tft);
     tft->setTextDatum(TL_DATUM);

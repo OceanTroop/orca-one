@@ -1,10 +1,8 @@
 #include "ComingSoonScreen.h"
-
 using namespace Applications::Services::GUI;
 
 void ComingSoonScreen::render(std::shared_ptr<TFT_eSPI> tft)
 {
-    tft->setTextColor(DEFAULT_PRIMARY_COLOR);
     tft->setTextDatum(TL_DATUM);
     this->setTextSizeSmall(this->_tft);
     tft->setCursor(0, 0);

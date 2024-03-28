@@ -102,7 +102,6 @@ void RunScreen::render(std::shared_ptr<TFT_eSPI> tft)
     auto displaySettings = displayInterface->getSettings();
 
     this->setTextSizeSmall(tft);
-    tft->setTextColor(DEFAULT_PRIMARY_COLOR);
 
     String title = this->_region == TVBGoneRegion::AmericasAsia
                        ? "Americas / Asia"

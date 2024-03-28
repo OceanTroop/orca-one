@@ -38,8 +38,6 @@ void WebUIScreen::render(std::shared_ptr<TFT_eSPI> tft)
 
     IPAddress ipAddress = WiFi.softAPIP();
 
-    tft->setTextColor(DEFAULT_PRIMARY_COLOR);
-
     this->setTextSizeMedium(tft);
     auto title = String("Web UI");
     auto titleX = (displaySettings.width - tft->textWidth(title)) / 2;

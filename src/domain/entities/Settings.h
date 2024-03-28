@@ -5,6 +5,7 @@
 #include <FS.h>
 
 #include "Language.h"
+#include "Color.h"
 #include "../../utility/FileUtility.h"
 
 #define SETTINGS_FILE_NAME "/settings.json"
@@ -22,6 +23,8 @@ extern "C"
         private:
             String _deviceName;
             Language _language;
+            Color _primaryColor;
+            Color _backgroundColor;
             void deserialize(String jsonString);
 
         public:
@@ -35,6 +38,10 @@ extern "C"
             void setDeviceName(String deviceName);
             Language getLanguage();
             void setLanguage(Language language);
+            Color getPrimaryColor();
+            void setPrimaryColor(Color color);
+            Color getBackgroundColor();
+            void setBackgroundColor(Color color);
 
             String serialize();
         };

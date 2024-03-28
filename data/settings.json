@@ -1,4 +1,6 @@
 {
     "deviceName": "@oceantroop",
-    "language": 0
+    "language": 0,
+    "primaryColor": 0,
+    "backgroundColor": 1
 }

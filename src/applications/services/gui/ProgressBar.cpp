@@ -12,6 +12,14 @@ ProgressBar::ProgressBar()
 
 void ProgressBar::render(std::shared_ptr<TFT_eSPI> tft)
 {
+    auto displaySettings = DeviceBase::getInstance()->getSettings();
+    auto primaryColor = colorToUInt16(displaySettings->getPrimaryColor());
+    auto backgroundColor = colorToUInt16(displaySettings->getBackgroundColor());
+    this->setProgressColor(primaryColor);
+    this->setTextColor(primaryColor);
+    this->setBorderColor(primaryColor);
+    this->setBackgroundColor(backgroundColor);
+
     tft->drawRect(this->_x, this->_y, this->_width, this->_height, this->_borderColor);
     tft->fillRect(this->_x + 1, this->_y + 1, this->_width - 2, this->_height - 2, this->_backgroundColor);
 

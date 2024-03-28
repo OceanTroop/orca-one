@@ -10,6 +10,8 @@ String Settings::serialize()
 
     doc["deviceName"] = this->_deviceName;
     doc["language"] = static_cast<int>(this->_language);
+    doc["primaryColor"] = static_cast<int>(this->_primaryColor);
+    doc["backgroundColor"] = static_cast<int>(this->_backgroundColor);
 
     String jsonString;
     serializeJson(doc, jsonString);
@@ -25,6 +27,8 @@ void Settings::deserialize(String jsonString)
 
     this->_deviceName = doc["deviceName"].as<String>();
     this->_language = static_cast<Language>(doc["language"].as<int>());
+    this->_primaryColor = static_cast<Color>(doc["primaryColor"].as<int>());
+    this->_backgroundColor = static_cast<Color>(doc["backgroundColor"].as<int>());
 }
 
 Settings::Settings(String jsonString)
@@ -73,4 +77,24 @@ Language Settings::getLanguage()
 void Settings::setLanguage(Language language)
 {
     this->_language = language;
+}
+
+Color Settings::getPrimaryColor()
+{
+    return this->_primaryColor;
+}
+
+void Settings::setPrimaryColor(Color color)
+{
+    this->_primaryColor = color;
+}
+
+Color Settings::getBackgroundColor()
+{
+    return this->_backgroundColor;
+}
+
+void Settings::setBackgroundColor(Color color)
+{
+    this->_backgroundColor = color;
 }
